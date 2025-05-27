@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6月份8:15彌撒安排</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft JhengHei", "Arial Unicode MS", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .week-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            border-left: 6px solid #3498db;
+            overflow: hidden;
+        }
+
+        .date-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .date-header:hover {
+            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+        }
+
+        .date {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .occasion {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        .toggle-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-icon.open {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .content-wrapper {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .content-wrapper.open {
+            max-height: 1000px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            padding: 25px;
+        }
+
+        .service-section, .hymns-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 15px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .service-item, .hymn-item {
+            margin-bottom: 12px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .service-label, .hymn-label {
+            font-weight: bold;
+            color: #6c757d;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .service-name, .hymn-name {
+            font-size: 1.3em;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .priest-item {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border: 2px solid #f39c12;
+        }
+
+        .priest-label {
+            color: #d35400;
+        }
+
+        .priest-name {
+            color: #d35400;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .week-card {
+                margin-bottom: 15px;
+            }
+
+            .date {
+                font-size: 1.5em;
+            }
+
+            .occasion {
+                font-size: 1.1em;
+            }
+
+            .section-title {
+                font-size: 1.2em;
+            }
+
+            .service-name, .hymn-name {
+                font-size: 1.1em;
+            }
+
+            .toggle-icon {
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .date-header {
+                padding: 10px 15px;
+            }
+
+            .service-section, .hymns-section {
+                padding: 15px;
+            }
+
+            .service-item, .hymn-item {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> 6月份8:15彌撒安排 </h1>
+        <div id="schedule-container"></div>
+    </div>
+
+    <script>
+        const juneSchedule = [
+            {
+                date: "6月1日",
+                occasion: "耶穌升天及社會傳播節",
+                priest: "鍾神父",
+                reader: "廖芷珊",
+                prayer_reporter: "鄭光普",
+                hymns: {
+                    entrance: "226首 耶穌升天歌",
+                    offertory: "86首 仁慈的聖父",
+                    communion: "274首 我給你們一條新誡命",
+                    recessional: "272首 傳揚福音"
+                }
+            },
+            {
+                date: "6月8日",
+                occasion: "五旬節/聖神降臨",
+                priest: "羅神父",
+                reader: "劉海豪",
+                prayer_reporter: "劉婉水",
+                hymns: {
+                    entrance: "79首 普天地頌揚上主",
+                    offertory: "85首 全能顯赫造物主",
+                    communion: "229首 伏求聖神",
+                    recessional: "289首 與基督同行"
+                }
+            },
+            {
+                date: "6月15日",
+                occasion: "天主聖三節",
+                priest: "鍾神父",
+                reader: "周詠恆",
+                prayer_reporter: "鍾麗娟",
+                hymns: {
+                    entrance: "123首 萬民請讚美上主（1,5節歌詞）",
+                    offertory: "81首 上主，萬有天主（一）",
+                    communion: "135首 我的天主，我的王",
+                    recessional: "108首 亞肋路亞，讚美天主"
+                }
+            },
+            {
+                date: "6月22日",
+                occasion: "基督聖體聖血節",
+                priest: "羅神父",
+                reader: "劉婉水",
+                prayer_reporter: "劉海豪",
+                hymns: {
+                    entrance: "79首 普天地頌揚上主",
+                    offertory: "88首 至尊無對的天主",
+                    communion: "99首 耶穌聖體我堅信你",
+                    recessional: "110首 我們全心感謝天主"
+                }
+            },
+            {
+                date: "6月29日",
+                occasion: "聖伯多祿,保祿-宗徒",
+                priest: "鍾神父",
+                reader: "周美玲",
+                prayer_reporter: "廖芷珊",
+                hymns: {
+                    entrance: "72首 我們來到上主的聖殿",
+                    offertory: "85首 全能顯赫造物主",
+                    communion: "98首 我們萬分不配",
+                    recessional: "111首 在基督的愛內"
+                }
+            }
+        ];
+
+        function getCurrentOrNextSundayIndex() {
+            const today = new Date();
+            const currentDate = today.getDate();
+            const currentMonth = today.getMonth() + 1; // JavaScript months are 0-indexed
+            
+            // If it's not June yet, open the first Sunday
+            if (currentMonth < 6) {
+                return 0;
+            }
+            
+            // If it's past June, open the last Sunday
+            if (currentMonth > 6) {
+                return juneSchedule.length - 1;
+            }
+            
+            // It's June, find the current or next Sunday
+            for (let i = 0; i < juneSchedule.length; i++) {
+                const scheduleDate = parseInt(juneSchedule[i].date.match(/\d+/)[0]);
+                if (scheduleDate >= currentDate) {
+                    return i;
+                }
+            }
+            
+            // If all Sundays have passed, open the last one
+            return juneSchedule.length - 1;
+        }
+
+        function toggleCard(index) {
+            const contentWrapper = document.getElementById(`content-${index}`);
+            const toggleIcon = document.getElementById(`toggle-${index}`);
+            
+            contentWrapper.classList.toggle('open');
+            toggleIcon.classList.toggle('open');
+        }
+
+        function renderSchedule() {
+            const container = document.getElementById('schedule-container');
+            const defaultOpenIndex = getCurrentOrNextSundayIndex();
+            
+            juneSchedule.forEach((item, index) => {
+                const isDefaultOpen = index === defaultOpenIndex;
+                
+                const weekCard = document.createElement('div');
+                weekCard.className = 'week-card';
+                
+                weekCard.innerHTML = `
+                    <div class="date-header" onclick="toggleCard(${index})">
+                        <div class="date">${item.date}</div>
+                        <div class="occasion">${item.occasion}</div>
+                        <div class="toggle-icon ${isDefaultOpen ? 'open' : ''}" id="toggle-${index}">▼</div>
+                    </div>
+                    
+                    <div class="content-wrapper ${isDefaultOpen ? 'open' : ''}" id="content-${index}">
+                        <div class="content-grid">
+                            <div class="service-section">
+                                <div class="section-title">🙏 服務人員</div>
+                                <div class="service-item priest-item">
+                                    <div class="service-label priest-label">主禮神父：</div>
+                                    <div class="service-name priest-name">${item.priest}</div>
+                                </div>
+                                ${item.reader ? `
+                                    <div class="service-item">
+                                        <div class="service-label">讀經一/信友禱文：</div>
+                                        <div class="service-name">${item.reader}</div>
+                                    </div>
+                                ` : ''}
+                                ${item.prayer_reporter ? `
+                                    <div class="service-item">
+                                        <div class="service-label">早禱/讀經二/堂區報告：</div>
+                                        <div class="service-name">${item.prayer_reporter}</div>
+                                    </div>
+                                ` : ''}
+                            </div>
+                            
+                            <div class="hymns-section">
+                                <div class="section-title">🎵 彌撒聖歌</div>
+                                <div class="hymn-item">
+                                    <div class="hymn-label">進堂詠：</div>
+                                    <div class="hymn-name">${item.hymns.entrance}</div>
+                                </div>
+                                <div class="hymn-item">
+                                    <div class="hymn-label">奉獻詠：</div>
+                                    <div class="hymn-name">${item.hymns.offertory}</div>
+                                </div>
+                                <div class="hymn-item">
+                                    <div class="hymn-label">領主詠：</div>
+                                    <div class="hymn-name">${item.hymns.communion}</div>
+                                </div>
+                                <div class="hymn-item">
+                                    <div class="hymn-label">禮成詠：</div>
+                                    <div class="hymn-name">${item.hymns.recessional}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(weekCard);
+            });
+        }
+
+        // 頁面載入時渲染內容
+        document.addEventListener('DOMContentLoaded', renderSchedule);
+    </script>
+</body>
+</html>
