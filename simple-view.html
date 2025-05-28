@@ -265,19 +265,83 @@
                 padding: 15px;
             }
 
-            /* 手機版表格響應式 */
-            .table-container {
-                overflow-x: auto;
-            }
-            
-            table {
-                min-width: 800px;
+            /* 手機版服務人員表格特殊處理 */
+            #services-table {
                 font-size: 0.9em;
             }
 
-            th, td {
-                padding: 10px 6px;
+            #services-table th:nth-child(1) { /* 主日讀經 */
+                width: 20%;
+                font-size: 0.8em;
+                padding: 12px 4px;
+            }
+
+            #services-table th:nth-child(2) { /* 丙年 */
+                width: 15%;
+                font-size: 0.8em;
+                padding: 12px 2px;
+            }
+
+            #services-table th:nth-child(3) { /* 讀經一/信友禱文 */
+                width: 22%;
+                font-size: 0.7em;
+                padding: 12px 4px;
+                line-height: 1.2;
+            }
+
+            #services-table th:nth-child(4) { /* 早禱/讀經二/堂區報告 */
+                width: 22%;
+                font-size: 0.7em;
+                padding: 12px 4px;
+                line-height: 1.2;
+            }
+
+            #services-table th:nth-child(5) { /* 主禮神父 */
+                width: 21%;
+                font-size: 0.8em;
+                padding: 12px 4px;
+            }
+
+            #services-table td:nth-child(1) { /* 日期欄 */
+                width: 20%;
+                font-size: 0.85em;
+                padding: 12px 4px;
+            }
+
+            #services-table td:nth-child(2) { /* 丙年欄 */
+                width: 15%;
+                font-size: 0.8em;
+                padding: 12px 2px;
+            }
+
+            #services-table td:nth-child(3), 
+            #services-table td:nth-child(4) { /* 讀經員和報告員 */
+                width: 22%;
+                font-size: 1em;
+                font-weight: bold;
+                padding: 12px 4px;
+                line-height: 1.3;
+            }
+
+            #services-table td:nth-child(5) { /* 主禮神父 */
+                width: 21%;
                 font-size: 0.9em;
+                padding: 12px 4px;
+            }
+
+            /* 彌撒歌曲表格手機版 */
+            #hymns-table {
+                font-size: 0.8em;
+            }
+
+            #hymns-table th, #hymns-table td {
+                padding: 10px 4px;
+                font-size: 0.85em;
+            }
+
+            #hymns-table td:nth-child(1), 
+            #hymns-table td:nth-child(2) {
+                font-weight: bold;
             }
         }
 
@@ -287,13 +351,53 @@
                 font-size: 1em;
             }
 
-            table {
-                min-width: 700px;
-                font-size: 0.8em;
+            /* 超小螢幕進一步優化 */
+            #services-table th:nth-child(2) { /* 丙年 */
+                width: 12%;
+                font-size: 0.7em;
+                padding: 8px 1px;
             }
 
-            th, td {
-                padding: 8px 4px;
+            #services-table td:nth-child(2) { /* 丙年欄 */
+                width: 12%;
+                font-size: 0.75em;
+                padding: 8px 1px;
+            }
+
+            #services-table th:nth-child(1) { /* 主日讀經 */
+                width: 22%;
+            }
+
+            #services-table th:nth-child(3), 
+            #services-table th:nth-child(4) { /* 讀經和報告欄標題 */
+                width: 24%;
+                font-size: 0.65em;
+            }
+
+            #services-table th:nth-child(5) { /* 主禮神父標題 */
+                width: 18%;
+            }
+
+            #services-table td:nth-child(1) { /* 日期欄 */
+                width: 22%;
+            }
+
+            #services-table td:nth-child(3), 
+            #services-table td:nth-child(4) { /* 讀經員和報告員 */
+                width: 24%;
+                font-size: 0.95em;
+            }
+
+            #services-table td:nth-child(5) { /* 主禮神父 */
+                width: 18%;
+            }
+
+            #hymns-table {
+                font-size: 0.7em;
+            }
+
+            #hymns-table th, #hymns-table td {
+                padding: 8px 2px;
                 font-size: 0.8em;
             }
         }
