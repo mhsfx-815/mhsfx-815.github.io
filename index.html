@@ -202,8 +202,21 @@
         }
 		
 		.view-switch {
-                padding: 10px 15px;
-                font-size: 1em;
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(253, 121, 168, 0.3);
+            font-family: inherit;
         }
 
         @media (max-width: 768px) {
@@ -277,8 +290,7 @@
                 <select id="month-select" onchange="loadSelectedMonth()">
                     <option value="">載入中...</option>
                 </select>
-            </div>
-			<!-- 在原本的 index.html 的 header-section 中的 month-selector 後加入 -->
+            </div>			
 			<a href="simple-view.html" class="view-switch">
 				📱 切換到分頁版面
 			</a>
