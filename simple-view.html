@@ -118,29 +118,64 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
-        .tab-button {
-            flex: 1;
-            padding: 18px 15px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.3em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
-            text-align: center;
-        }
+     .tab-button {
+    flex: 1;
+    padding: 18px 15px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7); /* 降低非活躍分頁的透明度 */
+    font-size: 1.3em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    text-align: center;
+    position: relative;
+    border-radius: 0;
+}
 
-        .tab-button:hover {
-            background: rgba(255,255,255,0.1);
-        }
+.tab-button:hover {
+    background: rgba(255,255,255,0.15);
+    color: white; /* 懸停時文字變白 */
+    transform: translateY(-2px); /* 輕微上移效果 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* 添加陰影 */
+}
 
-        .tab-button.active {
-            background: white;
-            color: #667eea;
-            box-shadow: inset 0 -3px 0 #667eea;
-        }
+.tab-button.active {
+    background: white;
+    color: #667eea;
+    box-shadow: inset 0 -4px 0 #667eea, 0 2px 10px rgba(102, 126, 234, 0.3); /* 增強底部邊框和外陰影 */
+    transform: translateY(-1px); /* 活躍分頁略微提升 */
+}
+
+.tab-button.active:hover {
+    background: #f8f9ff; /* 活躍分頁懸停時的淺藍背景 */
+    transform: translateY(-1px); /* 保持提升效果 */
+    box-shadow: inset 0 -4px 0 #667eea, 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* 添加點擊效果 */
+.tab-button:active {
+    transform: translateY(0);
+    transition: transform 0.1s ease;
+}
+
+/* 為非活躍分頁添加更明顯的可點擊提示 */
+.tab-button:not(.active)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.tab-button:not(.active):hover::after {
+    width: 80%;
+}	
 
         .tab-content {
             display: none;
