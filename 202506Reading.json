@@ -1,0 +1,71 @@
+{
+  "title": "6月份8:15彌撒安排",
+  "month": "2025-06",
+  "schedule": [
+    {
+      "date": "6月1日",
+      "occasion": "耶穌升天及社會傳播節",
+      "priest": "鍾神父",
+      "reader": "廖芷珊",
+      "prayer_reporter": "鄭光普",
+      "hymns": {
+        "entrance": "226首 耶穌升天歌",
+        "offertory": "86首 仁慈的聖父",
+        "communion": "274首 我給你們一條新誡命",
+        "recessional": "272首 傳揚福音"
+      }
+    },
+    {
+      "date": "6月8日",
+      "occasion": "五旬節/聖神降臨",
+      "priest": "羅神父",
+      "reader": "劉海豪",
+      "prayer_reporter": "劉婉冰",
+      "hymns": {
+        "entrance": "79首 普天地頌揚上主",
+        "offertory": "85首 全能顯赫造物主",
+        "communion": "229首 伏求聖神",
+        "recessional": "289首 與基督同行"
+      }
+    },
+    {
+      "date": "6月15日",
+      "occasion": "天主聖三節",
+      "priest": "鍾神父",
+      "reader": "周詠恆",
+      "prayer_reporter": "鍾麗娟",
+      "hymns": {
+        "entrance": "123首 萬民請讚美上主（1,5節歌詞）",
+        "offertory": "81首 上主，萬有天主（一）",
+        "communion": "135首 我的天主，我的王",
+        "recessional": "108首 亞肋路亞，讚美天主"
+      }
+    },
+    {
+      "date": "6月22日",
+      "occasion": "基督聖體聖血節",
+      "priest": "羅神父",
+      "reader": "劉海豪",
+      "prayer_reporter": "劉婉冰",
+      "hymns": {
+        "entrance": "79首 普天地頌揚上主",
+        "offertory": "88首 至尊無對的天主",
+        "communion": "99首 耶穌聖體我堅信你",
+        "recessional": "110首 我們全心感謝天主"
+      }
+    },
+    {
+      "date": "6月29日",
+      "occasion": "聖伯多祿,保祿-宗徒",
+      "priest": "鍾神父",
+      "reader": "鍾麗娟",
+      "prayer_reporter": "廖芷珊",
+      "hymns": {
+        "entrance": "72首 我們來到上主的聖殿",
+        "offertory": "85首 全能顯赫造物主",
+        "communion": "98首 我們萬分不配",
+        "recessional": "111首 在基督的愛內"
+      }
+    }
+  ]
+}

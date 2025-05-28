@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">彌撒安排表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft JhengHei", "Arial Unicode MS", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 15px;
+            line-height: 1.8;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.8em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .controls-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .month-selector {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 25px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .month-selector label {
+            font-weight: bold;
+            color: #495057;
+            margin-right: 15px;
+            font-size: 1.3em;
+        }
+
+        .month-selector select {
+            font-size: 1.3em;
+            padding: 12px 20px;
+            border: 3px solid #dee2e6;
+            border-radius: 15px;
+            background: white;
+            color: #495057;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            min-width: 200px;
+        }
+
+        .month-selector select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+        }
+
+        .view-switch {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(253, 121, 168, 0.3);
+            font-family: inherit;
+        }
+
+        .view-switch:hover {
+            background: linear-gradient(135deg, #e84393 0%, #f39c12 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(253, 121, 168, 0.4);
+        }
+
+        .tab-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 20px 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.4em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            text-align: center;
+        }
+
+        .tab-button:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .tab-button.active {
+            background: white;
+            color: #667eea;
+            box-shadow: inset 0 -3px 0 #667eea;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .date-card {
+            background: #f8f9fa;
+            border: 3px solid #e9ecef;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .date-header {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .date-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .date-occasion {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-left: 5px solid #667eea;
+        }
+
+        .info-label {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #6c757d;
+            margin-bottom: 8px;
+        }
+
+        .info-value {
+            font-size: 1.6em;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .priest-item {
+            border-left-color: #f39c12;
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+        }
+
+        .priest-item .info-label {
+            color: #d35400;
+        }
+
+        .priest-item .info-value {
+            color: #d35400;
+        }
+
+        .hymn-item {
+            border-left-color: #28a745;
+        }
+
+        .hymn-item .info-label {
+            color: #198754;
+        }
+
+        .loading, .error {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+
+        .loading {
+            color: #6c757d;
+        }
+
+        .error {
+            color: #dc3545;
+            background: white;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+                margin-bottom: 15px;
+            }
+
+            .controls-section {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .month-selector {
+                padding: 15px 20px;
+            }
+
+            .month-selector label {
+                font-size: 1.1em;
+            }
+
+            .month-selector select {
+                font-size: 1.1em;
+                padding: 10px 15px;
+                min-width: 150px;
+            }
+
+            .view-switch {
+                padding: 12px 20px;
+                font-size: 1.1em;
+            }
+
+            .tab-button {
+                font-size: 1.2em;
+                padding: 15px 10px;
+            }
+
+            .tab-content {
+                padding: 20px;
+            }
+
+            .date-title {
+                font-size: 1.5em;
+            }
+
+            .date-occasion {
+                font-size: 1.1em;
+            }
+
+            .info-value {
+                font-size: 1.3em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tab-buttons {
+                flex-direction: column;
+            }
+
+            .tab-button {
+                padding: 12px;
+                font-size: 1.1em;
+            }
+
+            .card-content {
+                padding: 15px;
+            }
+
+            .info-item {
+                padding: 15px;
+            }
+
+            .view-switch {
+                padding: 10px 15px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-section">
+            <h1 id="main-title">📿 彌撒安排表 📿</h1>
+            <div class="controls-section">
+                <div class="month-selector">
+                    <label for="month-select">選擇月份：</label>
+                    <select id="month-select" onchange="loadSelectedMonth()">
+                        <option value="">載入中...</option>
+                    </select>
+                </div>
+                <a href="index.html" class="view-switch">
+                    📋 切換到詳細版面
+                </a>
+            </div>
+        </div>
+
+        <div class="tab-container">
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="switchTab('services')">
+                    🙏 服務人員
+                </button>
+                <button class="tab-button" onclick="switchTab('hymns')">
+                    🎵 彌撒歌曲
+                </button>
+            </div>
+
+            <div id="services-tab" class="tab-content active">
+                <div id="services-container">
+                    <div class="loading">正在載入服務人員安排...</div>
+                </div>
+            </div>
+
+            <div id="hymns-tab" class="tab-content">
+                <div id="hymns-container">
+                    <div class="loading">正在載入彌撒歌曲...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentData = null;
+        let availableMonths = [];
+
+        // 檢查可用的月份檔案
+        async function detectAvailableMonths() {
+            const baseYear = 2025;
+            const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+            const available = [];
+
+            for (let month of months) {
+                try {
+                    const response = await fetch(`${baseYear}${month}Reading.json`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        available.push({
+                            value: `${baseYear}-${month}`,
+                            text: data.title || `${baseYear}年${parseInt(month)}月份8:15彌撒安排`,
+                            filename: `${baseYear}${month}Reading.json`
+                        });
+                    }
+                } catch (error) {
+                    // 檔案不存在，略過
+                }
+            }
+
+            return available;
+        }
+
+        // 獲取當前或最接近的下一個月份
+        function getCurrentOrNextMonth(availableMonths) {
+            if (availableMonths.length === 0) return null;
+
+            const today = new Date();
+            const currentYear = today.getFullYear();
+            const currentMonth = today.getMonth() + 1;
+            const currentDate = `${currentYear}-${currentMonth.toString().padStart(2, '0')}`;
+
+            for (let month of availableMonths) {
+                if (month.value >= currentDate) {
+                    return month.value;
+                }
+            }
+
+            return availableMonths[availableMonths.length - 1].value;
+        }
+
+        // 載入月份選擇器
+        async function loadMonthSelector() {
+            try {
+                availableMonths = await detectAvailableMonths();
+                const monthSelect = document.getElementById('month-select');
+                
+                if (availableMonths.length === 0) {
+                    monthSelect.innerHTML = '<option value="">沒有可用的月份資料</option>';
+                    return;
+                }
+
+                monthSelect.innerHTML = '';
+                availableMonths.forEach(month => {
+                    const option = document.createElement('option');
+                    option.value = month.value;
+                    option.textContent = month.text;
+                    monthSelect.appendChild(option);
+                });
+
+                const defaultMonth = getCurrentOrNextMonth(availableMonths);
+                if (defaultMonth) {
+                    monthSelect.value = defaultMonth;
+                    await loadMonth(defaultMonth);
+                }
+            } catch (error) {
+                console.error('載入月份選擇器時發生錯誤:', error);
+                document.getElementById('services-container').innerHTML = 
+                    '<div class="error">載入月份資料時發生錯誤</div>';
+                document.getElementById('hymns-container').innerHTML = 
+                    '<div class="error">載入月份資料時發生錯誤</div>';
+            }
+        }
+
+        // 載入選中的月份
+        async function loadSelectedMonth() {
+            const monthSelect = document.getElementById('month-select');
+            const selectedMonth = monthSelect.value;
+            if (selectedMonth) {
+                await loadMonth(selectedMonth);
+            }
+        }
+
+        // 載入特定月份的資料
+        async function loadMonth(monthValue) {
+            try {
+                const monthInfo = availableMonths.find(m => m.value === monthValue);
+                if (!monthInfo) return;
+
+                document.getElementById('services-container').innerHTML = 
+                    '<div class="loading">正在載入服務人員安排...</div>';
+                document.getElementById('hymns-container').innerHTML = 
+                    '<div class="loading">正在載入彌撒歌曲...</div>';
+
+                const response = await fetch(monthInfo.filename);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                currentData = await response.json();
+                
+                // 更新標題
+                document.getElementById('page-title').textContent = currentData.title;
+                document.getElementById('main-title').textContent = `📿 ${currentData.title} 📿`;
+                
+                renderServices();
+                renderHymns();
+            } catch (error) {
+                console.error('載入月份資料時發生錯誤:', error);
+                document.getElementById('services-container').innerHTML = 
+                    '<div class="error">載入服務人員安排時發生錯誤</div>';
+                document.getElementById('hymns-container').innerHTML = 
+                    '<div class="error">載入彌撒歌曲時發生錯誤</div>';
+            }
+        }
+
+        // 切換分頁
+        function switchTab(tabName) {
+            // 隱藏所有分頁內容
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 移除所有按鈕的活躍狀態
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 顯示選中的分頁
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            // 設置對應按鈕為活躍
+            event.target.classList.add('active');
+        }
+
+        // 渲染服務人員
+        function renderServices() {
+            if (!currentData || !currentData.schedule) return;
+
+            const container = document.getElementById('services-container');
+            container.innerHTML = '';
+            
+            currentData.schedule.forEach(item => {
+                const dateCard = document.createElement('div');
+                dateCard.className = 'date-card';
+                
+                dateCard.innerHTML = `
+                    <div class="date-header">
+                        <div class="date-title">${item.date}</div>
+                        <div class="date-occasion">${item.occasion}</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-item priest-item">
+                            <div class="info-label">主禮神父</div>
+                            <div class="info-value">${item.priest}</div>
+                        </div>
+                        ${item.reader ? `
+                            <div class="info-item">
+                                <div class="info-label">讀經一/信友禱文</div>
+                                <div class="info-value">${item.reader}</div>
+                            </div>
+                        ` : ''}
+                        ${item.prayer_reporter ? `
+                            <div class="info-item">
+                                <div class="info-label">早禱/讀經二/堂區報告</div>
+                                <div class="info-value">${item.prayer_reporter}</div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+                
+                container.appendChild(dateCard);
+            });
+        }
+
+        // 渲染彌撒歌曲
+        function renderHymns() {
+            if (!currentData || !currentData.schedule) return;
+
+            const container = document.getElementById('hymns-container');
+            container.innerHTML = '';
+            
+            currentData.schedule.forEach(item => {
+                const dateCard = document.createElement('div');
+                dateCard.className = 'date-card';
+                
+                dateCard.innerHTML = `
+                    <div class="date-header">
+                        <div class="date-title">${item.date}</div>
+                        <div class="date-occasion">${item.occasion}</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-item hymn-item">
+                            <div class="info-label">進堂詠</div>
+                            <div class="info-value">${item.hymns.entrance}</div>
+                        </div>
+                        <div class="info-item hymn-item">
+                            <div class="info-label">奉獻詠</div>
+                            <div class="info-value">${item.hymns.offertory}</div>
+                        </div>
+                        <div class="info-item hymn-item">
+                            <div class="info-label">領主詠</div>
+                            <div class="info-value">${item.hymns.communion}</div>
+                        </div>
+                        <div class="info-item hymn-item">
+                            <div class="info-label">禮成詠</div>
+                            <div class="info-value">${item.hymns.recessional}</div>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(dateCard);
+            });
+        }
+
+        // 頁面載入時初始化
+        document.addEventListener('DOMContentLoaded', loadMonthSelector);
+    </script>
+</body>
+</html>

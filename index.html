@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>6月份8:15彌撒安排</title>
+    <title id="page-title">彌撒安排表</title>
     <style>
         * {
             margin: 0;
@@ -24,12 +24,66 @@
             margin: 0 auto;
         }
 
-        h1 {
+        .header-section {
             text-align: center;
-            color: #2c3e50;
             margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #2c3e50;
             font-size: 2.5em;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .month-selector {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .month-selector label {
+            font-weight: bold;
+            color: #495057;
+            margin-right: 10px;
+            font-size: 1.1em;
+        }
+
+        .month-selector select {
+            font-size: 1.1em;
+            padding: 8px 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            background: white;
+            color: #495057;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .month-selector select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2em;
+            color: #6c757d;
+        }
+
+        .error {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2em;
+            color: #dc3545;
+            background: white;
+            border-radius: 15px;
+            margin: 20px 0;
         }
 
         .week-card {
@@ -154,7 +208,7 @@
 
             h1 {
                 font-size: 2em;
-                margin-bottom: 20px;
+                margin-bottom: 15px;
             }
 
             .content-grid {
@@ -186,6 +240,10 @@
             .toggle-icon {
                 right: 15px;
             }
+
+            .month-selector {
+                padding: 10px 20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -205,104 +263,163 @@
 </head>
 <body>
     <div class="container">
-        <h1> 6月份8:15彌撒安排 </h1>
-        <div id="schedule-container"></div>
+        <div class="header-section">
+            <h1 id="main-title">📿 彌撒安排表 📿</h1>
+            <div class="month-selector">
+                <label for="month-select">選擇月份：</label>
+                <select id="month-select" onchange="loadSelectedMonth()">
+                    <option value="">載入中...</option>
+                </select>
+            </div>
+        </div>
+        <div id="schedule-container">
+            <div class="loading">正在載入彌撒安排...</div>
+        </div>
     </div>
 
     <script>
-        const juneSchedule = [
-            {
-                date: "6月1日",
-                occasion: "耶穌升天及社會傳播節",
-                priest: "鍾神父",
-                reader: "廖芷珊",
-                prayer_reporter: "鄭光普",
-                hymns: {
-                    entrance: "226首 耶穌升天歌",
-                    offertory: "86首 仁慈的聖父",
-                    communion: "274首 我給你們一條新誡命",
-                    recessional: "272首 傳揚福音"
-                }
-            },
-            {
-                date: "6月8日",
-                occasion: "五旬節/聖神降臨",
-                priest: "羅神父",
-                reader: "劉海豪",
-                prayer_reporter: "劉婉冰",
-                hymns: {
-                    entrance: "79首 普天地頌揚上主",
-                    offertory: "85首 全能顯赫造物主",
-                    communion: "229首 伏求聖神",
-                    recessional: "289首 與基督同行"
-                }
-            },
-            {
-                date: "6月15日",
-                occasion: "天主聖三節",
-                priest: "鍾神父",
-                reader: "周詠恆",
-                prayer_reporter: "鍾麗娟",
-                hymns: {
-                    entrance: "123首 萬民請讚美上主（1,5節歌詞）",
-                    offertory: "81首 上主，萬有天主（一）",
-                    communion: "135首 我的天主，我的王",
-                    recessional: "108首 亞肋路亞，讚美天主"
-                }
-            },
-            {
-                date: "6月22日",
-                occasion: "基督聖體聖血節",
-                priest: "羅神父",
-                reader: "劉海豪",
-                prayer_reporter: "劉婉冰",
-                hymns: {
-                    entrance: "79首 普天地頌揚上主",
-                    offertory: "88首 至尊無對的天主",
-                    communion: "99首 耶穌聖體我堅信你",
-                    recessional: "110首 我們全心感謝天主"
-                }
-            },
-            {
-                date: "6月29日",
-                occasion: "聖伯多祿,保祿-宗徒",
-                priest: "鍾神父",
-                reader: "鍾麗娟",
-                prayer_reporter: "廖芷珊",
-                hymns: {
-                    entrance: "72首 我們來到上主的聖殿",
-                    offertory: "85首 全能顯赫造物主",
-                    communion: "98首 我們萬分不配",
-                    recessional: "111首 在基督的愛內"
+        let currentData = null;
+        let availableMonths = [];
+
+        // 檢查可用的月份檔案
+        async function detectAvailableMonths() {
+            const baseYear = 2025;
+            const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+            const available = [];
+
+            for (let month of months) {
+                try {
+                    const response = await fetch(`${baseYear}${month}Reading.json`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        available.push({
+                            value: `${baseYear}-${month}`,
+                            text: data.title || `${baseYear}年${parseInt(month)}月份8:15彌撒安排`,
+                            filename: `${baseYear}${month}Reading.json`
+                        });
+                    }
+                } catch (error) {
+                    // 檔案不存在，略過
                 }
             }
-        ];
+
+            return available;
+        }
+
+        // 獲取當前或最接近的下一個月份
+        function getCurrentOrNextMonth(availableMonths) {
+            if (availableMonths.length === 0) return null;
+
+            const today = new Date();
+            const currentYear = today.getFullYear();
+            const currentMonth = today.getMonth() + 1; // JavaScript months are 0-indexed
+            const currentDate = `${currentYear}-${currentMonth.toString().padStart(2, '0')}`;
+
+            // 找到當前月份或下一個可用月份
+            for (let month of availableMonths) {
+                if (month.value >= currentDate) {
+                    return month.value;
+                }
+            }
+
+            // 如果所有月份都已過去，返回最後一個
+            return availableMonths[availableMonths.length - 1].value;
+        }
+
+        // 載入月份選擇器
+        async function loadMonthSelector() {
+            try {
+                availableMonths = await detectAvailableMonths();
+                const monthSelect = document.getElementById('month-select');
+                
+                if (availableMonths.length === 0) {
+                    monthSelect.innerHTML = '<option value="">沒有可用的月份資料</option>';
+                    return;
+                }
+
+                monthSelect.innerHTML = '';
+                availableMonths.forEach(month => {
+                    const option = document.createElement('option');
+                    option.value = month.value;
+                    option.textContent = month.text;
+                    monthSelect.appendChild(option);
+                });
+
+                // 選擇當前或下一個月份
+                const defaultMonth = getCurrentOrNextMonth(availableMonths);
+                if (defaultMonth) {
+                    monthSelect.value = defaultMonth;
+                    await loadMonth(defaultMonth);
+                }
+            } catch (error) {
+                console.error('載入月份選擇器時發生錯誤:', error);
+                document.getElementById('schedule-container').innerHTML = 
+                    '<div class="error">載入月份資料時發生錯誤</div>';
+            }
+        }
+
+        // 載入選中的月份
+        async function loadSelectedMonth() {
+            const monthSelect = document.getElementById('month-select');
+            const selectedMonth = monthSelect.value;
+            if (selectedMonth) {
+                await loadMonth(selectedMonth);
+            }
+        }
+
+        // 載入特定月份的資料
+        async function loadMonth(monthValue) {
+            try {
+                const monthInfo = availableMonths.find(m => m.value === monthValue);
+                if (!monthInfo) return;
+
+                document.getElementById('schedule-container').innerHTML = 
+                    '<div class="loading">正在載入彌撒安排...</div>';
+
+                const response = await fetch(monthInfo.filename);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                currentData = await response.json();
+                
+                // 更新標題
+                document.getElementById('page-title').textContent = currentData.title;
+                document.getElementById('main-title').textContent = `📿 ${currentData.title} 📿`;
+                
+                renderSchedule();
+            } catch (error) {
+                console.error('載入月份資料時發生錯誤:', error);
+                document.getElementById('schedule-container').innerHTML = 
+                    '<div class="error">載入彌撒安排時發生錯誤，請稍後再試</div>';
+            }
+        }
 
         function getCurrentOrNextSundayIndex() {
+            if (!currentData || !currentData.schedule) return 0;
+
             const today = new Date();
             const currentDate = today.getDate();
-            const currentMonth = today.getMonth() + 1; // JavaScript months are 0-indexed
+            const currentMonth = today.getMonth() + 1;
             
-            // If it's not June yet, open the first Sunday
-            if (currentMonth < 6) {
+            // 解析月份值 (如 "2025-06")
+            const [year, month] = currentData.month.split('-').map(Number);
+            
+            // 如果不是當前月份，預設開啟第一個
+            if (currentMonth !== month) {
                 return 0;
             }
             
-            // If it's past June, open the last Sunday
-            if (currentMonth > 6) {
-                return juneSchedule.length - 1;
-            }
-            
-            // It's June, find the current or next Sunday
-            for (let i = 0; i < juneSchedule.length; i++) {
-                const scheduleDate = parseInt(juneSchedule[i].date.match(/\d+/)[0]);
+            // 找到當前或下一個主日
+            for (let i = 0; i < currentData.schedule.length; i++) {
+                const scheduleDate = parseInt(currentData.schedule[i].date.match(/\d+/)[0]);
                 if (scheduleDate >= currentDate) {
                     return i;
                 }
             }
             
-            // If all Sundays have passed, open the last one
-            return juneSchedule.length - 1;
+            // 如果所有主日都已過去，開啟最後一個
+            return currentData.schedule.length - 1;
         }
 
         function toggleCard(index) {
@@ -314,10 +431,14 @@
         }
 
         function renderSchedule() {
+            if (!currentData || !currentData.schedule) return;
+
             const container = document.getElementById('schedule-container');
             const defaultOpenIndex = getCurrentOrNextSundayIndex();
             
-            juneSchedule.forEach((item, index) => {
+            container.innerHTML = '';
+            
+            currentData.schedule.forEach((item, index) => {
                 const isDefaultOpen = index === defaultOpenIndex;
                 
                 const weekCard = document.createElement('div');
@@ -379,8 +500,8 @@
             });
         }
 
-        // 頁面載入時渲染內容
-        document.addEventListener('DOMContentLoaded', renderSchedule);
+        // 頁面載入時初始化
+        document.addEventListener('DOMContentLoaded', loadMonthSelector);
     </script>
 </body>
 </html>
