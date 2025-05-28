@@ -15,13 +15,14 @@
             font-family: "Microsoft JhengHei", "Arial Unicode MS", sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             padding: 15px;
-            line-height: 1.8;
+            line-height: 1.6;
             color: #333;
             min-height: 100vh;
+            font-size: 18px;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -32,7 +33,7 @@
 
         h1 {
             color: #2c3e50;
-            font-size: 2.8em;
+            font-size: 2.5em;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
             margin-bottom: 20px;
             font-weight: bold;
@@ -49,65 +50,65 @@
 
         .month-selector {
             background: white;
-            padding: 20px 30px;
-            border-radius: 25px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            padding: 15px 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .month-selector label {
             font-weight: bold;
             color: #495057;
-            margin-right: 15px;
-            font-size: 1.3em;
+            margin-right: 10px;
+            font-size: 1.1em;
         }
 
         .month-selector select {
-            font-size: 1.3em;
-            padding: 12px 20px;
-            border: 3px solid #dee2e6;
-            border-radius: 15px;
+            font-size: 1.1em;
+            padding: 10px 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
             background: white;
             color: #495057;
             cursor: pointer;
             font-family: inherit;
             font-weight: bold;
-            min-width: 200px;
+            min-width: 180px;
         }
 
         .month-selector select:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
         }
 
         .view-switch {
             background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
             color: white;
-            padding: 15px 25px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 25px;
-            font-size: 1.2em;
+            border-radius: 20px;
+            font-size: 1.1em;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(253, 121, 168, 0.3);
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(253, 121, 168, 0.3);
             font-family: inherit;
         }
 
         .view-switch:hover {
             background: linear-gradient(135deg, #e84393 0%, #f39c12 100%);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(253, 121, 168, 0.4);
+            box-shadow: 0 6px 16px rgba(253, 121, 168, 0.4);
         }
 
         .tab-container {
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.1);
             overflow: hidden;
             margin-bottom: 20px;
         }
@@ -119,11 +120,11 @@
 
         .tab-button {
             flex: 1;
-            padding: 20px 15px;
+            padding: 18px 15px;
             background: none;
             border: none;
             color: white;
-            font-size: 1.4em;
+            font-size: 1.3em;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -143,91 +144,74 @@
 
         .tab-content {
             display: none;
-            padding: 30px;
+            padding: 20px;
         }
 
         .tab-content.active {
             display: block;
         }
 
-        .date-card {
-            background: #f8f9fa;
-            border: 3px solid #e9ecef;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        .table-container {
+            overflow-x: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        .date-header {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 1.1em;
+        }
+
+        th {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
             color: white;
-            padding: 20px;
+            padding: 18px 12px;
             text-align: center;
-        }
-
-        .date-title {
-            font-size: 1.8em;
             font-weight: bold;
-            margin-bottom: 8px;
+            font-size: 1.1em;
+            border: 1px solid #2980b9;
         }
 
-        .date-occasion {
-            font-size: 1.3em;
-            opacity: 0.95;
+        td {
+            padding: 16px 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-weight: 600;
         }
 
-        .card-content {
-            padding: 25px;
-        }
-
-        .info-item {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            border-left: 5px solid #667eea;
-        }
-
-        .info-label {
-            font-size: 1.2em;
+        .date-col {
+            background-color: #e8f4fd;
             font-weight: bold;
-            color: #6c757d;
-            margin-bottom: 8px;
-        }
-
-        .info-value {
-            font-size: 1.6em;
             color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .occasion-col {
+            background-color: #f0f8e8;
             font-weight: bold;
+            color: #27ae60;
         }
 
-        .priest-item {
-            border-left-color: #f39c12;
+        .priest-col {
             background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
-        }
-
-        .priest-item .info-label {
+            font-weight: bold;
             color: #d35400;
         }
 
-        .priest-item .info-value {
-            color: #d35400;
+        tr:nth-child(even) td:not(.date-col):not(.occasion-col):not(.priest-col) {
+            background-color: #f9f9f9;
         }
 
-        .hymn-item {
-            border-left-color: #28a745;
-        }
-
-        .hymn-item .info-label {
-            color: #198754;
+        tr:hover td {
+            background-color: #e3f2fd !important;
         }
 
         .loading, .error {
             text-align: center;
-            padding: 60px 20px;
-            font-size: 1.4em;
+            padding: 50px 20px;
+            font-size: 1.3em;
             font-weight: bold;
         }
 
@@ -238,17 +222,28 @@
         .error {
             color: #dc3545;
             background: white;
-            border-radius: 15px;
+            border-radius: 10px;
             margin: 20px 0;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 1024px) {
+            table {
+                font-size: 1em;
+            }
+            th, td {
+                padding: 12px 8px;
+            }
         }
 
         @media (max-width: 768px) {
             body {
                 padding: 10px;
+                font-size: 16px;
             }
 
             h1 {
-                font-size: 2.2em;
+                font-size: 2em;
                 margin-bottom: 15px;
             }
 
@@ -258,67 +253,48 @@
             }
 
             .month-selector {
-                padding: 15px 20px;
-            }
-
-            .month-selector label {
-                font-size: 1.1em;
-            }
-
-            .month-selector select {
-                font-size: 1.1em;
-                padding: 10px 15px;
-                min-width: 150px;
-            }
-
-            .view-switch {
                 padding: 12px 20px;
-                font-size: 1.1em;
             }
 
             .tab-button {
-                font-size: 1.2em;
+                font-size: 1.1em;
                 padding: 15px 10px;
             }
 
             .tab-content {
-                padding: 20px;
+                padding: 15px;
             }
 
-            .date-title {
-                font-size: 1.5em;
+            /* 手機版表格響應式 */
+            .table-container {
+                overflow-x: auto;
+            }
+            
+            table {
+                min-width: 800px;
+                font-size: 0.9em;
             }
 
-            .date-occasion {
-                font-size: 1.1em;
-            }
-
-            .info-value {
-                font-size: 1.3em;
+            th, td {
+                padding: 10px 6px;
+                font-size: 0.9em;
             }
         }
 
         @media (max-width: 480px) {
-            .tab-buttons {
-                flex-direction: column;
-            }
-
-            .tab-button {
-                padding: 12px;
-                font-size: 1.1em;
-            }
-
-            .card-content {
-                padding: 15px;
-            }
-
-            .info-item {
-                padding: 15px;
-            }
-
             .view-switch {
                 padding: 10px 15px;
                 font-size: 1em;
+            }
+
+            table {
+                min-width: 700px;
+                font-size: 0.8em;
+            }
+
+            th, td {
+                padding: 8px 4px;
+                font-size: 0.8em;
             }
         }
     </style>
@@ -351,14 +327,45 @@
             </div>
 
             <div id="services-tab" class="tab-content active">
-                <div id="services-container">
-                    <div class="loading">正在載入服務人員安排...</div>
+                <div class="table-container">
+                    <table id="services-table">
+                        <thead>
+                            <tr>
+                                <th>主日讀經</th>
+                                <th>丙年</th>
+                                <th>讀經一/信友禱文</th>
+                                <th>早禱/讀經二/<br>堂區報告</th>
+                                <th>主禮神父</th>
+                            </tr>
+                        </thead>
+                        <tbody id="services-tbody">
+                            <tr>
+                                <td class="loading" colspan="5">正在載入服務人員安排...</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
             <div id="hymns-tab" class="tab-content">
-                <div id="hymns-container">
-                    <div class="loading">正在載入彌撒歌曲...</div>
+                <div class="table-container">
+                    <table id="hymns-table">
+                        <thead>
+                            <tr>
+                                <th>日期</th>
+                                <th>節日/主日</th>
+                                <th>進堂詠</th>
+                                <th>奉獻詠</th>
+                                <th>領主詠</th>
+                                <th>禮成詠</th>
+                            </tr>
+                        </thead>
+                        <tbody id="hymns-tbody">
+                            <tr>
+                                <td class="loading" colspan="6">正在載入彌撒歌曲...</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -437,10 +444,10 @@
                 }
             } catch (error) {
                 console.error('載入月份選擇器時發生錯誤:', error);
-                document.getElementById('services-container').innerHTML = 
-                    '<div class="error">載入月份資料時發生錯誤</div>';
-                document.getElementById('hymns-container').innerHTML = 
-                    '<div class="error">載入月份資料時發生錯誤</div>';
+                document.getElementById('services-tbody').innerHTML = 
+                    '<tr><td class="error" colspan="5">載入月份資料時發生錯誤</td></tr>';
+                document.getElementById('hymns-tbody').innerHTML = 
+                    '<tr><td class="error" colspan="6">載入月份資料時發生錯誤</td></tr>';
             }
         }
 
@@ -459,10 +466,10 @@
                 const monthInfo = availableMonths.find(m => m.value === monthValue);
                 if (!monthInfo) return;
 
-                document.getElementById('services-container').innerHTML = 
-                    '<div class="loading">正在載入服務人員安排...</div>';
-                document.getElementById('hymns-container').innerHTML = 
-                    '<div class="loading">正在載入彌撒歌曲...</div>';
+                document.getElementById('services-tbody').innerHTML = 
+                    '<tr><td class="loading" colspan="5">正在載入服務人員安排...</td></tr>';
+                document.getElementById('hymns-tbody').innerHTML = 
+                    '<tr><td class="loading" colspan="6">正在載入彌撒歌曲...</td></tr>';
 
                 const response = await fetch(monthInfo.filename);
                 if (!response.ok) {
@@ -475,14 +482,14 @@
                 document.getElementById('page-title').textContent = currentData.title;
                 document.getElementById('main-title').textContent = `📿 ${currentData.title} 📿`;
                 
-                renderServices();
-                renderHymns();
+                renderServicesTable();
+                renderHymnsTable();
             } catch (error) {
                 console.error('載入月份資料時發生錯誤:', error);
-                document.getElementById('services-container').innerHTML = 
-                    '<div class="error">載入服務人員安排時發生錯誤</div>';
-                document.getElementById('hymns-container').innerHTML = 
-                    '<div class="error">載入彌撒歌曲時發生錯誤</div>';
+                document.getElementById('services-tbody').innerHTML = 
+                    '<tr><td class="error" colspan="5">載入服務人員安排時發生錯誤</td></tr>';
+                document.getElementById('hymns-tbody').innerHTML = 
+                    '<tr><td class="error" colspan="6">載入彌撒歌曲時發生錯誤</td></tr>';
             }
         }
 
@@ -505,83 +512,44 @@
             event.target.classList.add('active');
         }
 
-        // 渲染服務人員
-        function renderServices() {
+        // 渲染服務人員表格
+        function renderServicesTable() {
             if (!currentData || !currentData.schedule) return;
 
-            const container = document.getElementById('services-container');
-            container.innerHTML = '';
+            const tbody = document.getElementById('services-tbody');
+            tbody.innerHTML = '';
             
             currentData.schedule.forEach(item => {
-                const dateCard = document.createElement('div');
-                dateCard.className = 'date-card';
-                
-                dateCard.innerHTML = `
-                    <div class="date-header">
-                        <div class="date-title">${item.date}</div>
-                        <div class="date-occasion">${item.occasion}</div>
-                    </div>
-                    <div class="card-content">
-                        <div class="info-item priest-item">
-                            <div class="info-label">主禮神父</div>
-                            <div class="info-value">${item.priest}</div>
-                        </div>
-                        ${item.reader ? `
-                            <div class="info-item">
-                                <div class="info-label">讀經一/信友禱文</div>
-                                <div class="info-value">${item.reader}</div>
-                            </div>
-                        ` : ''}
-                        ${item.prayer_reporter ? `
-                            <div class="info-item">
-                                <div class="info-label">早禱/讀經二/堂區報告</div>
-                                <div class="info-value">${item.prayer_reporter}</div>
-                            </div>
-                        ` : ''}
-                    </div>
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="date-col">${item.date}</td>
+                    <td class="occasion-col">${item.occasion}</td>
+                    <td>${item.reader || ''}</td>
+                    <td>${item.prayer_reporter || ''}</td>
+                    <td class="priest-col">${item.priest || ''}</td>
                 `;
-                
-                container.appendChild(dateCard);
+                tbody.appendChild(row);
             });
         }
 
-        // 渲染彌撒歌曲
-        function renderHymns() {
+        // 渲染彌撒歌曲表格
+        function renderHymnsTable() {
             if (!currentData || !currentData.schedule) return;
 
-            const container = document.getElementById('hymns-container');
-            container.innerHTML = '';
+            const tbody = document.getElementById('hymns-tbody');
+            tbody.innerHTML = '';
             
             currentData.schedule.forEach(item => {
-                const dateCard = document.createElement('div');
-                dateCard.className = 'date-card';
-                
-                dateCard.innerHTML = `
-                    <div class="date-header">
-                        <div class="date-title">${item.date}</div>
-                        <div class="date-occasion">${item.occasion}</div>
-                    </div>
-                    <div class="card-content">
-                        <div class="info-item hymn-item">
-                            <div class="info-label">進堂詠</div>
-                            <div class="info-value">${item.hymns.entrance}</div>
-                        </div>
-                        <div class="info-item hymn-item">
-                            <div class="info-label">奉獻詠</div>
-                            <div class="info-value">${item.hymns.offertory}</div>
-                        </div>
-                        <div class="info-item hymn-item">
-                            <div class="info-label">領主詠</div>
-                            <div class="info-value">${item.hymns.communion}</div>
-                        </div>
-                        <div class="info-item hymn-item">
-                            <div class="info-label">禮成詠</div>
-                            <div class="info-value">${item.hymns.recessional}</div>
-                        </div>
-                    </div>
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="date-col">${item.date}</td>
+                    <td class="occasion-col">${item.occasion}</td>
+                    <td>${item.hymns.entrance}</td>
+                    <td>${item.hymns.offertory}</td>
+                    <td>${item.hymns.communion}</td>
+                    <td>${item.hymns.recessional}</td>
                 `;
-                
-                container.appendChild(dateCard);
+                tbody.appendChild(row);
             });
         }
 
