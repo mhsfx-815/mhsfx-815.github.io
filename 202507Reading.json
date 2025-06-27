@@ -1,0 +1,58 @@
+{
+  "title": "7月份8:15彌撒安排",
+  "month": "2025-07",
+  "schedule": [
+    {
+      "date": "7月6日",
+      "occasion": "常年期第十四主日",
+      "priest": "羅神父",
+      "reader": "廖芷珊",
+      "prayer_reporter": "鍾麗娟",
+      "hymns": {
+        "entrance": "259首 上主庭院",
+        "offertory": "87首 請接受我們的禮品",
+        "communion": "96首 天上神聖食糧",
+        "recessional": "107首 眾心的太陽"
+      }
+    },
+    {
+      "date": "7月13日",
+      "occasion": "常年期第十五主日",
+      "priest": "李神父",
+      "reader": "劉海豪",
+      "prayer_reporter": "周美玲",
+      "hymns": {
+        "entrance": "114首 爾眾萬邦",
+        "offertory": "84首 敬獻給你",
+        "communion": "273首 何處有仁",
+        "recessional": "104首 大地高天同讚上主"
+      }
+    },
+    {
+      "date": "7月20日",
+      "occasion": "常年期第十六主日",
+      "priest": "鍾神父",
+      "reader": "鄭光普",
+      "prayer_reporter": "劉婉冰",
+      "hymns": {
+        "entrance": "74首 天國眾子民",
+        "offertory": "88首 至尊無對的天主",
+        "communion": "275首 真福八端",
+        "recessional": "279首 播種仁愛"
+      }
+    },
+    {
+      "date": "7月27日",
+      "occasion": "常年期第十七主日",
+      "priest": "鍾神父",
+      "reader": "鍾麗娟",
+      "prayer_reporter": "周詠恆",
+      "hymns": {
+        "entrance": "78首 我們同聚共樂歡然",
+        "offertory": "90首 仁慈的聖父",
+        "communion": "119首 義人向上主歡呼",
+        "recessional": "110首 我們全心感謝天主"
+      }
+    }
+  ]
+}
