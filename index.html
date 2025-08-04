@@ -346,6 +346,25 @@
 	}
 
         // 獲取當前或最接近的下一個月份
+	function getCurrentOrNextMonth(availableMonths) {
+	            if (availableMonths.length === 0) return null;
+	
+	            const today = new Date();
+	            const currentYear = today.getFullYear();
+	            const currentMonth = today.getMonth() + 1; // JavaScript months are 0-indexed
+	            const currentDate = `${currentYear}-${currentMonth.toString().padStart(2, '0')}`;
+	
+	            // 找到當前月份或下一個可用月份
+	            for (let month of availableMonths) {
+	                if (month.value >= currentDate) {
+	                    return month.value;
+	                }
+	            }
+	
+	            // 如果所有月份都已過去，返回最後一個
+	            return availableMonths[availableMonths.length - 1].value;
+	}
+	    
        function getCurrentOrNextSundayIndex() {
 	    if (!currentData || !currentData.schedule) return 0;
 	
@@ -424,45 +443,7 @@
             }
         }
 
-	function getCurrentOrNextSundayIndex() {
-	    if (!currentData || !currentData.schedule) return 0;
 	
-	    const today = new Date();
-	    today.setHours(0, 0, 0, 0); // 只比對到天
-	
-	    // 逐一檢查每個主日
-	    for (let i = 0; i < currentData.schedule.length; i++) {
-	        const item = currentData.schedule[i];
-	        // 假設 item.date 是 "8月10日"、"8月17日" 這種格式
-	        const match = item.date.match(/^(\d{1,2})月(\d{1,2})日$/);
-	        if (match) {
-	            let month = parseInt(match[1], 10);
-	            let day = parseInt(match[2], 10);
-	            let year = today.getFullYear();
-	
-	            // 若本 schedule 屬於 next/prev 年的月份，需判斷
-	            // 取得 currentData.month (格式 "YYYY-MM")
-	            if (currentData.month) {
-	                const [dataYear, dataMonth] = currentData.month.split('-').map(Number);
-	                // 如果主日月比 dataMonth 小，則屬於「下一年」的主日
-	                if (month < dataMonth) {
-	                    year = dataYear + 1;
-	                } else {
-	                    year = dataYear;
-	                }
-	            }
-	
-	            const sundayDate = new Date(year, month - 1, day);
-	            sundayDate.setHours(0, 0, 0, 0);
-	
-	            if (sundayDate >= today) {
-	                return i;
-	            }
-	        }
-	    }
-	    // 若全都過去，開最後一個
-	    return currentData.schedule.length - 1;
-	}
 
         // 載入特定月份的資料
         async function loadMonth(monthValue) {
@@ -603,5 +584,6 @@
 </body>
 
 </html>
+
 
 
