@@ -473,33 +473,7 @@
             }
         }
 
-        function getCurrentOrNextSundayIndex() {
-            if (!currentData || !currentData.schedule) return 0;
-
-            const today = new Date();
-            const currentDate = today.getDate();
-            const currentMonth = today.getMonth() + 1;
-            
-            // 解析月份值 (如 "2025-06")
-            const [year, month] = currentData.month.split('-').map(Number);
-            
-            // 如果不是當前月份，預設開啟第一個
-            if (currentMonth !== month) {
-                return 0;
-            }
-            
-            // 找到當前或下一個主日
-            for (let i = 0; i < currentData.schedule.length; i++) {
-                const scheduleDate = parseInt(currentData.schedule[i].date.match(/\d+/)[0]);
-                if (scheduleDate >= currentDate) {
-                    return i;
-                }
-            }
-            
-            // 如果所有主日都已過去，開啟最後一個
-            return currentData.schedule.length - 1;
-        }
-
+       
         function toggleCard(index) {
             const contentWrapper = document.getElementById(`content-${index}`);
             const toggleIcon = document.getElementById(`toggle-${index}`);
@@ -584,6 +558,7 @@
 </body>
 
 </html>
+
 
 
 
