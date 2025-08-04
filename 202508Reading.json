@@ -1,0 +1,71 @@
+{
+  "title": "8月份8:15彌撒安排",
+  "month": "2025-08",
+  "schedule": [
+    {
+      "date": "8月3日",
+      "occasion": "常年期第十八主日",
+      "priest": "羅神父",
+      "reader": "劉婉冰",
+      "prayer_reporter": "廖芷珊",
+      "hymns": {
+        "entrance": "72首 我們來到上主的聖殿",
+        "offertory": "81首 上主，萬有天主（一）",
+        "communion": "149首 我主可愛耶穌",
+        "recessional": "105首 請你們稱謝上主"
+      }
+    },
+    {
+      "date": "8月10日",
+      "occasion": "常年期第十九主日",
+      "priest": "鍾神父",
+      "reader": "周詠恆",
+      "prayer_reporter": "鍾麗娟",
+      "hymns": {
+        "entrance": "73首 奔赴主前",
+        "offertory": "87首 請接受我們的禮品",
+        "communion": "119首 義人向上主歡呼",
+        "recessional": "121首 天父慈恩應讚頌"
+      }
+    },
+    {
+      "date": "8月17日",
+      "occasion": "常年期第二十主日",
+      "priest": "羅神父",
+      "reader": "周美玲",
+      "prayer_reporter": "劉婉冰",
+      "hymns": {
+        "entrance": "74首 天國眾子民",
+        "offertory": "90首 仁慈的聖父",
+        "communion": "96首 天上神聖食糧",
+        "recessional": "109首 天主我們讚美你"
+      }
+    },
+    {
+      "date": "8月24日",
+      "occasion": "常年期第二十一主日",
+      "priest": "鍾神父",
+      "reader": "劉海豪",
+      "prayer_reporter": "周美玲",
+      "hymns": {
+        "entrance": "123首 萬民請讚美上主",
+        "offertory": "83首 上主，萬有的天主（二）",
+        "communion": "98首 我們萬分不配",
+        "recessional": "269首 真光照著我"
+      }
+    },
+    {
+      "date": "8月31日",
+      "occasion": "常年期第二十二主日",
+      "priest": "羅神父",
+      "reader": "廖芷珊",
+      "prayer_reporter": "鄭光普",
+      "hymns": {
+        "entrance": "76首 歡欣常樂於上主",
+        "offertory": "85首 全能顯赫造物主",
+        "communion": "91首 我領主的體血時",
+        "recessional": "110首 我們全心感謝天主"
+      }
+    }
+  ]
+}
