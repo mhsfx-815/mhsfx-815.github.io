@@ -305,49 +305,83 @@
         let availableMonths = [];
 
         // 檢查可用的月份檔案
-        async function detectAvailableMonths() {
-            const baseYear = 2025;
-            const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-            const available = [];
-
-            for (let month of months) {
-                try {
-                    const response = await fetch(`${baseYear}${month}Reading.json`);
-                    if (response.ok) {
-                        const data = await response.json();
-                        available.push({
-                            value: `${baseYear}-${month}`,
-                            text: data.title || `${baseYear}年${parseInt(month)}月份8:15彌撒安排`,
-                            filename: `${baseYear}${month}Reading.json`
-                        });
-                    }
-                } catch (error) {
-                    // 檔案不存在，略過
-                }
-            }
-
-            return available;
-        }
+      async function detectAvailableMonths() {
+	    const available = [];
+	    const now = new Date();
+	
+	    // 計算起始與結束月份（跨年自動判斷）
+	    const monthsRange = [];
+	    for (let offset = -1; offset <= 2; offset++) {
+	        const date = new Date(now.getFullYear(), now.getMonth() + offset, 1);
+	        const year = date.getFullYear();
+	        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+	        monthsRange.push({ year, month });
+	    }
+	
+	    for (let { year, month } of monthsRange) {
+	        const filename = `${year}${month}Reading.json`;
+	        try {
+	            // 先用 HEAD 確認檔案是否存在
+	            const response = await fetch(filename, { method: 'HEAD' });
+	            if (response.ok) {
+	                // 真的存在才抓內容
+	                const dataRes = await fetch(filename);
+	                if (dataRes.ok) {
+	                    const data = await dataRes.json();
+	                    available.push({
+	                        value: `${year}-${month}`,
+	                        text: data.title || `${year}年${parseInt(month)}月份8:15彌撒安排`,
+	                        filename
+	                    });
+	                }
+	            }
+	        } catch (err) {
+	            // 檔案不存在或錯誤，略過
+	        }
+	    }
+	
+	    // 依年月排序
+	    available.sort((a, b) => a.value.localeCompare(b.value));
+	    return available;
+	}
 
         // 獲取當前或最接近的下一個月份
-        function getCurrentOrNextMonth(availableMonths) {
-            if (availableMonths.length === 0) return null;
-
-            const today = new Date();
-            const currentYear = today.getFullYear();
-            const currentMonth = today.getMonth() + 1; // JavaScript months are 0-indexed
-            const currentDate = `${currentYear}-${currentMonth.toString().padStart(2, '0')}`;
-
-            // 找到當前月份或下一個可用月份
-            for (let month of availableMonths) {
-                if (month.value >= currentDate) {
-                    return month.value;
-                }
-            }
-
-            // 如果所有月份都已過去，返回最後一個
-            return availableMonths[availableMonths.length - 1].value;
-        }
+       function getCurrentOrNextSundayIndex() {
+	    if (!currentData || !currentData.schedule) return 0;
+	
+	    const today = new Date();
+	    today.setHours(0, 0, 0, 0); // 只比較日期，不比較時間
+	
+	    // 解析月份值 (如 "2025-08")
+	    const [year, month] = currentData.month.split('-').map(Number);
+	
+	    // 將主日的年月日組合為 Date，再比對
+	    for (let i = 0; i < currentData.schedule.length; i++) {
+	        let dateStr = currentData.schedule[i].date; // 例："8月10日"
+	        // 解析出月與日
+	        let match = dateStr.match(/(\d+)[^\d]+(\d+)[^\d]*/);
+	        if (match) {
+	            let itemMonth = parseInt(match[1]);
+	            let itemDay = parseInt(match[2]);
+	            // 處理跨月（如果 schedule 裡有 9月x日 但 month=8 仍可比對）
+	            let itemYear = year;
+	            if (itemMonth < month) {
+	                itemYear += 1; // 假如資料橫跨年底
+	            } else if (itemMonth > month) {
+	                itemYear = year; // 正常情況
+	            }
+	            let sundayDate = new Date(itemYear, itemMonth - 1, itemDay);
+	            sundayDate.setHours(0, 0, 0, 0);
+	
+	            if (sundayDate >= today) {
+	                return i;
+	            }
+	        }
+	    }
+	
+	    // 如果所有主日都已過去，開啟最後一個
+	    return currentData.schedule.length - 1;
+	}
 
         // 載入月份選擇器
         async function loadMonthSelector() {
@@ -527,4 +561,5 @@
         document.addEventListener('DOMContentLoaded', loadMonthSelector);
     </script>
 </body>
+
 </html>
