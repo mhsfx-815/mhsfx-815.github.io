@@ -1,0 +1,58 @@
+{
+  "title": "9月份8:15彌撒安排",
+  "month": "2025-09",
+  "schedule": [
+    {
+      "date": "9月7日",
+      "occasion": "常年期第廿三主日",
+      "priest": "鍾神父",
+      "reader": "劉海豪",
+      "prayer_reporter": "周詠恆",
+      "hymns": {
+        "entrance": "114首 爾眾萬邦",
+        "offertory": "86首 仁慈的聖父",
+        "communion": "232首 天主聖神",
+        "recessional": "104首 大地高天同讚上主"
+      }
+    },
+    {
+      "date": "9月14日",
+      "occasion": "常年期第廿四主日（光榮十字聖架）",
+      "priest": "羅神父",
+      "reader": "廖芷珊",
+      "prayer_reporter": "鍾麗娟",
+      "hymns": {
+        "entrance": "79首 普天地頌揚上主",
+        "offertory": "88首 至尊無對的天主",
+        "communion": "207首 耶穌救世無窮愛",
+        "recessional": "107首 眾心的太陽"
+      }
+    },
+    {
+      "date": "9月21日",
+      "occasion": "常年期第廿五主日",
+      "priest": "鍾神父",
+      "reader": "鄭光普",
+      "prayer_reporter": "周美玲",
+      "hymns": {
+        "entrance": "78首 我們同聚共樂歡然",
+        "offertory": "83首 上主萬有的天主（二）",
+        "communion": "97首 上主是牧者",
+        "recessional": "279首 播種仁愛"
+      }
+    },
+    {
+      "date": "9月28日",
+      "occasion": "常年期第廿六主日",
+      "priest": "羅神父",
+      "reader": "周詠恆",
+      "prayer_reporter": "劉婉冰",
+      "hymns": {
+        "entrance": "72首 我們來到上主的聖殿",
+        "offertory": "85首 全能顯赫造物主",
+        "communion": "98首 我們萬分不配",
+        "recessional": "105首 請你們稱讚上主"
+      }
+    }
+  ]
+}
