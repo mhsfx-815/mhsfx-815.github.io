@@ -1,0 +1,97 @@
+{
+  "title": "12月份8:15彌撒安排",
+  "month": "2025-12",
+  "schedule": [
+    {
+      "date": "12月7日",
+      "occasion": "將臨期第二主日（甲年）",
+      "priest": "羅神父",
+      "reader": "周詠恆",
+      "prayer_reporter": "劉婉冰",
+      "hymns": {
+        "entrance": "114首 爾眾萬邦",
+        "offertory": "88首 至尊無對的天主",
+        "communion": "97首 上主是牧者",
+        "recessional": "177首 人類救主請速降臨"
+      }
+    },
+    {
+      "date": "12月8日（一）",
+      "occasion": "聖母無原罪瞻禮（8:15 特別彌撒）",
+      "priest": "鍾神父",
+      "reader": "劉婉冰",
+      "prayer_reporter": "廖芷珊",
+      "hymns": {
+        "entrance": "243首 無原罪讚",
+        "offertory": "81首 上主，萬有天主（一）",
+        "communion": "96首 天上神聖食糧",
+        "recessional": "240首 吁！瑪利亞"
+      }
+    },
+    {
+      "date": "12月14日",
+      "occasion": "將臨期第三主日（甲年）",
+      "priest": "鍾神父",
+      "reader": "劉海豪",
+      "prayer_reporter": "周美玲",
+      "hymns": {
+        "entrance": "123首 萬民，請讚美上主",
+        "offertory": "83首 上主，萬有天主（二）",
+        "communion": "94首 弟兄們，齊奉聖言",
+        "recessional": "176首 來啊！至聖默西亞"
+      }
+    },
+    {
+      "date": "12月21日",
+      "occasion": "將臨期第四主日（甲年）",
+      "priest": "羅神父",
+      "reader": "周美玲",
+      "prayer_reporter": "劉婉冰",
+      "hymns": {
+        "entrance": "72首 我們來到上主的聖殿",
+        "offertory": "88首 至尊無對的天主",
+        "communion": "101首 分享同一聖體",
+        "recessional": "178首 醒吧，醒吧"
+      }
+    },
+    {
+      "date": "12月25日（四）",
+      "occasion": "聖誕節（彌撒）",
+      "priest": "鍾神父",
+      "reader": "鍾麗娟",
+      "prayer_reporter": "周詠恆",
+      "hymns": {
+        "entrance": "187首 新生王",
+        "offertory": "84首 敬獻給你",
+        "communion": "185首 無數天使空際臨",
+        "recessional": "190首 普世歡騰"
+      }
+    },
+    {
+      "date": "12月28日",
+      "occasion": "聖家節",
+      "priest": "鍾神父",
+      "reader": "廖芷珊",
+      "prayer_reporter": "鄭光普",
+      "hymns": {
+        "entrance": "267首 司祭百姓",
+        "offertory": "87首 請接受我們的禮品",
+        "communion": "91首 我領主的體血時",
+        "recessional": "293首 聖家歌"
+      }
+    },
+    {
+      "date": "12月31日（二）15:00",
+      "occasion": "謝主禮（彌撒）",
+      "priest": "鍾神父",
+      "reader": "鍾麗娟",
+      "prayer_reporter": "周詠恆（司儀）",
+      "hymns": {
+        "entrance": "",
+        "offertory": "",
+        "communion": "",
+        "recessional": ""
+      }
+    }
+  ]
+}
