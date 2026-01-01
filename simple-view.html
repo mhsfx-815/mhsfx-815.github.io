@@ -516,26 +516,42 @@
 
         // 檢查可用的月份檔案
         async function detectAvailableMonths() {
-            const baseYear = 2025;
-            const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
             const available = [];
+            const now = new Date();
 
-            for (let month of months) {
+            // 計算起始與結束月份（跨年自動判斷）
+            const monthsRange = [];
+            for (let offset = -1; offset <= 2; offset++) {
+                const date = new Date(now.getFullYear(), now.getMonth() + offset, 1);
+                const year = date.getFullYear();
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                monthsRange.push({ year, month });
+            }
+
+            for (let { year, month } of monthsRange) {
+                const filename = `${year}${month}Reading.json`;
                 try {
-                    const response = await fetch(`${baseYear}${month}Reading.json`);
+                    // 先用 HEAD 確認檔案是否存在
+                    const response = await fetch(filename, { method: 'HEAD' });
                     if (response.ok) {
-                        const data = await response.json();
-                        available.push({
-                            value: `${baseYear}-${month}`,
-                            text: data.title || `${baseYear}年${parseInt(month)}月份8:15彌撒安排`,
-                            filename: `${baseYear}${month}Reading.json`
-                        });
+                        // 真的存在才抓內容
+                        const dataRes = await fetch(filename);
+                        if (dataRes.ok) {
+                            const data = await dataRes.json();
+                            available.push({
+                                value: `${year}-${month}`,
+                                text: data.title || `${year}年${parseInt(month)}月份8:15彌撒安排`,
+                                filename
+                            });
+                        }
                     }
-                } catch (error) {
-                    // 檔案不存在，略過
+                } catch (err) {
+                    // 檔案不存在或錯誤，略過
                 }
             }
 
+            // 依年月排序
+            available.sort((a, b) => a.value.localeCompare(b.value));
             return available;
         }
 
