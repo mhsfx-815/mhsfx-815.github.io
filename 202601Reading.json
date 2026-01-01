@@ -1,0 +1,71 @@
+{
+  "title": "1月份8:15彌撒安排",
+  "month": "2026-01",
+  "schedule": [
+    {
+      "date": "1月1日（四）",
+      "occasion": "瑪利亞天主之母節（甲年）",
+      "priest": "",
+      "reader": "周詠恒",
+      "prayer_reporter": "周美玲",
+      "hymns": {
+        "entrance": "191首 齊來欽崇",
+        "offertory": "86首 仁慈的聖父",
+        "communion": "101首 分享同一聖體",
+        "recessional": "244首 瑪利亞天主之母"
+      }
+    },
+    {
+      "date": "1月4日",
+      "occasion": "主顯節（甲年）",
+      "priest": "",
+      "reader": "劉婉冰",
+      "prayer_reporter": "廖芷珊",
+      "hymns": {
+        "entrance": "194首 我們三王",
+        "offertory": "81首 上主，萬有天主（一）",
+        "communion": "94首 弟兄們，齊奉聖言",
+        "recessional": "181首 同聲歌唱齊歡呼"
+      }
+    },
+    {
+      "date": "1月11日",
+      "occasion": "耶穌受洗節（甲年）",
+      "priest": "",
+      "reader": "鄭光普",
+      "prayer_reporter": "周詠恒",
+      "hymns": {
+        "entrance": "74首 天國眾子民",
+        "offertory": "87首 請接受我們的禮品",
+        "communion": "102首 耶穌基督是生命源",
+        "recessional": "110首 我們全心感謝天主"
+      }
+    },
+    {
+      "date": "1月18日",
+      "occasion": "常年期第二主日（甲年）",
+      "priest": "",
+      "reader": "鍾麗娟",
+      "prayer_reporter": "鄭光普",
+      "hymns": {
+        "entrance": "114首 爾眾萬邦",
+        "offertory": "87首 請接受我們的禮品",
+        "communion": "271首 有一新戒命",
+        "recessional": "111首 在基督的愛內"
+      }
+    },
+    {
+      "date": "1月25日",
+      "occasion": "常年期第三主日（甲年）",
+      "priest": "",
+      "reader": "周美玲",
+      "prayer_reporter": "劉婉冰",
+      "hymns": {
+        "entrance": "73首 奔赴主前",
+        "offertory": "83首 上主，萬有的天主（二）",
+        "communion": "91首 我領主的體血時",
+        "recessional": "108首 亞肋路亞，讚美天主"
+      }
+    }
+  ]
+}
