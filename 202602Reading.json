@@ -1,0 +1,72 @@
+{
+  "title": "2月份8:15彌撒安排",
+  "month": "2026-02",
+  "schedule": [
+    {
+      "date": "2月1日",
+      "occasion": "常年期第四主日（甲年）",
+      "priest": "鍾神父",
+      "reader": "劉海豪",
+      "prayer_reporter": "周美玲",
+      "hymns": {
+        "entrance": "74首 天國眾子民",
+        "offertory": "84首 敬獻給你",
+        "communion": "91首 我領主的體血時",
+        "recessional": "289首 與基督同行"
+      }
+    },
+    {
+      "date": "2月8日",
+      "occasion": "常年期第五主日（甲年）",
+      "priest": "羅神父",
+      "reader": "鄭光普",
+      "prayer_reporter": "鍾麗娟",
+      "hymns": {
+        "entrance": "72首 我們來到上主的聖殿",
+        "offertory": "87首 請接受我們的禮品",
+        "communion": "270首 方濟各的祈禱",
+        "recessional": "269首 真光照著我"
+      }
+    },
+    {
+      "date": "2月15日",
+      "occasion": "常年期第六主日（甲年）",
+      "priest": "鍾神父",
+      "reader": "廖芷珊",
+      "prayer_reporter": "劉海豪",
+      "hymns": {
+        "entrance": "78首 我們同聚共樂歡然",
+        "offertory": "85首 全能顯赫造物主",
+        "communion": "274首 我給你們一條新誡命",
+        "recessional": "111首 在基督的愛內"
+      }
+    },
+        {
+      "date": "2月17日",
+      "occasion": "年初一",
+      "priest": "鍾神父",
+      "reader": "鍾麗娟",
+      "prayer_reporter": "廖芷珊",
+      "hymns": {
+        "entrance": "待定",
+        "offertory": "待定",
+        "communion": "待定",
+        "recessional": "待定"
+      }
+    },
+    {
+      "date": "2月22日",
+      "occasion": "四旬期第一主日（甲年）",
+      "priest": "羅神父",
+      "reader": "劉婉冰",
+      "prayer_reporter": "周詠恆",
+      "hymns": {
+        "entrance": "207首 耶穌救世無窮愛",
+        "offertory": "86首 仁慈的聖父",
+        "communion": "98首 我們萬分不配",
+        "recessional": "210首 四旬期歌"
+      }
+    }
+  ],
+
+}
