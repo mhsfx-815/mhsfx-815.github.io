@@ -1,0 +1,77 @@
+{
+  "title": "3月份8:15彌撒安排",
+  "month": "2026-03",
+  "schedule": [
+    {
+      "date": "3月1日",
+      "occasion": "四旬期第二主日",
+      "priest": "鍾神父",
+      "reader": "周美玲",
+      "prayer_reporter": "廖芷珊",
+      "hymns": {
+        "gospel_acclamation": "59首",
+        "entrance": "209首 回歸父家",
+        "offertory": "81首 上主，萬有天主（一）",
+        "communion": "206首 誰與我一同悲傷",
+        "recessional": "198首 黑夜之中放光明"
+      }
+    },
+    {
+      "date": "3月8日",
+      "occasion": "四旬期第三主日",
+      "priest": "羅神父",
+      "reader": "劉海豪",
+      "prayer_reporter": "鄭光普",
+      "hymns": {
+        "gospel_acclamation": "59首",
+        "entrance": "74首 天國眾子民",
+        "offertory": "82首 奉獻身心",
+        "communion": "102首 耶穌基督是生命源",
+        "recessional": "202首 耶路撒冷，讚美上主"
+      }
+    },
+    {
+      "date": "3月15日",
+      "occasion": "四旬期第四主日",
+      "priest": "羅神父",
+      "reader": "周詠恆",
+      "prayer_reporter": "劉婉冰",
+      "hymns": {
+        "gospel_acclamation": "59首",
+        "entrance": "79首 普天地頌揚上主",
+        "offertory": "83首 上主，萬有的天主（二）",
+        "communion": "97首 上主是牧者",
+        "recessional": "282首 奇妙救恩"
+      }
+    },
+    {
+      "date": "3月22日",
+      "occasion": "四旬期第五主日",
+      "priest": "鍾神父",
+      "reader": "鄭光普",
+      "prayer_reporter": "劉婉冰",
+      "hymns": {
+        "gospel_acclamation": "59首",
+        "entrance": "72首 我們來到上主的聖殿",
+        "offertory": "84首 敬獻給你",
+        "communion": "200首 仁愛救世天主",
+        "recessional": "207首 耶穌救世無窮愛"
+      }
+    },
+    {
+      "date": "3月29日",
+      "occasion": "聖枝主日",
+      "priest": "羅神父",
+      "reader": "廖芷珊（司儀）",
+      "prayer_reporter": "周美玲（讀經一），周詠恒（讀經二），劉海豪（福音）",
+      "hymns": {
+        "gospel_acclamation": "59首",
+        "entrance": "204首 耶穌基督品位尊",
+        "offertory": "87首 請接受我們的禮品",
+        "communion": "101首 分享同一聖體",
+        "recessional": "170首 西雍讚揚救主"
+      },
+      "notes": "原圖標示當日8:00舉行；讀經/司儀多位分工已依原圖備註列出。"
+    }
+  ]
+}
