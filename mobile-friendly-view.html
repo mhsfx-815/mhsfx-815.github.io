@@ -17,6 +17,7 @@
             padding: 10px;
             line-height: 1.6;
             color: #333;
+            overflow-x: hidden;
         }
 
         .container {
@@ -79,13 +80,32 @@
             margin: 15px 0;
         }
 
-        .week-card {
+        /* 卡片容器 - 水平滑動 */
+        .cards-container {
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 15px;
+            padding: 10px 0 20px;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
+
+        .cards-container::-webkit-scrollbar {
+            display: none; /* Chrome/Safari/Opera */
+        }
+
+        /* 单个卡片 */
+        .card {
+            scroll-snap-align: start;
+            flex: 0 0 calc(100% - 15px);
             background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
-            border-left: 4px solid #3498db;
-            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 15px;
+            min-width: 90%;
         }
 
         .date-header {
@@ -93,13 +113,8 @@
             color: white;
             padding: 12px 15px;
             text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .date-header:hover {
-            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
         .date {
@@ -113,34 +128,10 @@
             opacity: 0.9;
         }
 
-        .toggle-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.2em;
-            transition: transform 0.3s ease;
-        }
-
-        .toggle-icon.open {
-            transform: translateY(-50%) rotate(180deg);
-        }
-
-        .content-wrapper {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .content-wrapper.open {
-            max-height: 1500px;
-        }
-
         .content-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 10px;
-            padding: 10px;
         }
 
         .service-section, .hymns-section {
@@ -194,6 +185,27 @@
             color: #d35400;
         }
 
+        /* 导航指示器 */
+        .indicator-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+            transition: background 0.3s ease;
+        }
+
+        .indicator.active {
+            background: #667eea;
+        }
+
+        /* 响应式设计 */
         @media (max-width: 480px) {
             h1 {
                 font-size: 1.5em;
@@ -205,8 +217,13 @@
                 margin-bottom: 8px;
             }
 
+            .card {
+                padding: 10px;
+                min-width: 95%;
+            }
+
             .date {
-                font-size: 1.1em;
+                font-size: 1.2em;
             }
 
             .occasion {
@@ -215,7 +232,6 @@
 
             .content-grid {
                 gap: 8px;
-                padding: 8px;
             }
 
             .service-section, .hymns-section {
@@ -251,6 +267,7 @@
     <script>
         let currentData = null;
         let availableMonths = [];
+        let currentCardIndex = 0;
 
         // 檢查可用的月份檔案
         async function detectAvailableMonths() {
@@ -418,79 +435,122 @@
             }
         }
 
-        function toggleCard(index) {
-            const contentWrapper = document.getElementById(`content-${index}`);
-            const toggleIcon = document.getElementById(`toggle-${index}`);
-            
-            contentWrapper.classList.toggle('open');
-            toggleIcon.classList.toggle('open');
-        }
-
         function renderSchedule() {
             if (!currentData || !currentData.schedule) return;
 
             const container = document.getElementById('schedule-container');
-            const defaultOpenIndex = getCurrentOrNextSundayIndex();
             
-            container.innerHTML = '';
+            // 创建卡片容器
+            const cardsContainer = document.createElement('div');
+            cardsContainer.className = 'cards-container';
+            cardsContainer.id = 'cards-container';
             
+            // 创建导航指示器
+            const indicatorContainer = document.createElement('div');
+            indicatorContainer.className = 'indicator-container';
+            indicatorContainer.id = 'indicator-container';
+            
+            // 渲染每个卡片
             currentData.schedule.forEach((item, index) => {
-                const isDefaultOpen = index === defaultOpenIndex;
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.id = `card-${index}`;
                 
-                const weekCard = document.createElement('div');
-                weekCard.className = 'week-card';
-                
-                weekCard.innerHTML = `
-                    <div class="date-header" onclick="toggleCard(${index})">
+                card.innerHTML = `
+                    <div class="date-header">
                         <div class="date">${item.date}</div>
                         <div class="occasion">${item.occasion}</div>
-                        <div class="toggle-icon" id="toggle-${index}">▼</div>
                     </div>
-                    <div class="content-wrapper" id="content-${index}" ${isDefaultOpen ? 'class="content-wrapper open"' : ''}>
-                        <div class="content-grid">
-                            <div class="service-section">
-                                <div class="section-title">服務人員</div>
-                                <div class="service-item priest-item">
-                                    <div class="service-label priest-label">主禮神父</div>
-                                    <div class="service-name priest-name">${item.priest}</div>
-                                </div>
+                    <div class="content-grid">
+                        <div class="service-section">
+                            <div class="section-title">讀經人員</div>
+                            <div class="service-item priest-item">
+                                <div class="service-label priest-label">主禮神父</div>
+                                <div class="service-name priest-name">${item.priest}</div>
+                            </div>
+                            ${item.reader ? `
                                 <div class="service-item">
                                     <div class="service-label">讀經人員</div>
                                     <div class="service-name">${item.reader}</div>
                                 </div>
+                            ` : ''}
+                            ${item.prayer_reporter ? `
                                 <div class="service-item">
                                     <div class="service-label">早禱/讀經二/堂區報告</div>
                                     <div class="service-name">${item.prayer_reporter}</div>
                                 </div>
+                            ` : ''}
+                        </div>
+                        <div class="hymns-section">
+                            <div class="section-title">彌撒歌曲</div>
+                            <div class="hymn-item">
+                                <div class="hymn-label">進堂詠</div>
+                                <div class="hymn-name">${item.hymns.entrance}</div>
                             </div>
-                            <div class="hymns-section">
-                                <div class="section-title">彌撒歌曲</div>
-                                <div class="hymn-item">
-                                    <div class="hymn-label">進堂詠</div>
-                                    <div class="hymn-name">${item.hymns.entrance}</div>
-                                </div>
-                                <div class="hymn-item">
-                                    <div class="hymn-label">奉獻詠</div>
-                                    <div class="hymn-name">${item.hymns.offertory}</div>
-                                </div>
-                                <div class="hymn-item">
-                                    <div class="hymn-label">領主詠</div>
-                                    <div class="hymn-name">${item.hymns.communion}</div>
-                                </div>
-                                <div class="hymn-item">
-                                    <div class="hymn-label">禮成詠</div>
-                                    <div class="hymn-name">${item.hymns.recessional}</div>
-                                </div>
-                                <div class="hymn-item">
-                                    <div class="hymn-label">福音詠</div>
-                                    <div class="hymn-name">${item.hymns.gospel_acclamation}</div>
-                                </div>
+                            <div class="hymn-item">
+                                <div class="hymn-label">奉獻詠</div>
+                                <div class="hymn-name">${item.hymns.offertory}</div>
+                            </div>
+                            <div class="hymn-item">
+                                <div class="hymn-label">領主詠</div>
+                                <div class="hymn-name">${item.hymns.communion}</div>
+                            </div>
+                            <div class="hymn-item">
+                                <div class="hymn-label">禮成詠</div>
+                                <div class="hymn-name">${item.hymns.recessional}</div>
+                            </div>
+                            <div class="hymn-item">
+                                <div class="hymn-label">福音詠</div>
+                                <div class="hymn-name">${item.hymns.gospel_acclamation}</div>
                             </div>
                         </div>
                     </div>
                 `;
                 
-                container.appendChild(weekCard);
+                cardsContainer.appendChild(card);
+                
+                // 创建指示器
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator';
+                indicator.dataset.index = index;
+                if (index === 0) {
+                    indicator.classList.add('active');
+                }
+                indicatorContainer.appendChild(indicator);
+            });
+            
+            // 添加到容器
+            container.innerHTML = '';
+            container.appendChild(cardsContainer);
+            container.appendChild(indicatorContainer);
+            
+            // 添加事件监听器
+            setupScrollListener();
+        }
+
+        function setupScrollListener() {
+            const container = document.getElementById('cards-container');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            if (!container) return;
+            
+            container.addEventListener('scroll', function() {
+                const scrollPosition = container.scrollLeft;
+                const cardWidth = container.querySelector('.card').offsetWidth;
+                const newIndex = Math.round(scrollPosition / cardWidth);
+                
+                if (newIndex !== currentCardIndex) {
+                    currentCardIndex = newIndex;
+                    
+                    // 更新指示器
+                    indicators.forEach((indicator, index) => {
+                        if (index === newIndex) {
+                            indicator.classList.add('active');
+                        } else {
+                            indicator.classList.remove('active');
+                        }
+                    });
+                }
             });
         }
 
