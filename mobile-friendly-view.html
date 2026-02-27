@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彌撒安排表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft JhengHei", "Arial Unicode MS", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 10px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .month-selector {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .month-selector label {
+            font-weight: bold;
+            color: #495057;
+            margin-right: 8px;
+            font-size: 1em;
+        }
+
+        .month-selector select {
+            font-size: 1em;
+            padding: 6px 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            background: white;
+            color: #495057;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 30px;
+            font-size: 1em;
+            color: #6c757d;
+        }
+
+        .error {
+            text-align: center;
+            padding: 30px;
+            font-size: 1em;
+            color: #dc3545;
+            background: white;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .week-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+            overflow: hidden;
+        }
+
+        .date-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .date-header:hover {
+            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+        }
+
+        .date {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .occasion {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .toggle-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-icon.open {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .content-wrapper {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .content-wrapper.open {
+            max-height: 1500px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .service-section, .hymns-section {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 10px;
+            text-align: center;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .service-item, .hymn-item {
+            margin-bottom: 8px;
+            padding: 8px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+        }
+
+        .service-label, .hymn-label {
+            font-weight: bold;
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-bottom: 2px;
+        }
+
+        .service-name, .hymn-name {
+            font-size: 1em;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .priest-item {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border: 1px solid #f39c12;
+        }
+
+        .priest-label {
+            color: #d35400;
+        }
+
+        .priest-name {
+            color: #d35400;
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+                margin-bottom: 8px;
+            }
+
+            .month-selector {
+                padding: 8px 10px;
+                margin-bottom: 8px;
+            }
+
+            .date {
+                font-size: 1.1em;
+            }
+
+            .occasion {
+                font-size: 0.9em;
+            }
+
+            .content-grid {
+                gap: 8px;
+                padding: 8px;
+            }
+
+            .service-section, .hymns-section {
+                padding: 10px;
+            }
+
+            .service-item, .hymn-item {
+                padding: 6px;
+            }
+
+            .service-name, .hymn-name {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-section">
+            <h1>📿 彌撒安排表 📿</h1>
+            <div class="month-selector">
+                <label for="month-select">選擇月份：</label>
+                <select id="month-select" onchange="loadSelectedMonth()">
+                    <option value="">載入中...</option>
+                </select>
+            </div>
+        </div>
+        <div id="schedule-container">
+            <div class="loading">正在載入彌撒安排...</div>
+        </div>
+    </div>
+
+    <script>
+        let currentData = null;
+        let availableMonths = [];
+
+        // 檢查可用的月份檔案
+        async function detectAvailableMonths() {
+            const available = [];
+            const now = new Date();
+
+            // 計算起始與結束月份（跨年自動判斷）
+            const monthsRange = [];
+            for (let offset = -1; offset <= 2; offset++) {
+                const date = new Date(now.getFullYear(), now.getMonth() + offset, 1);
+                const year = date.getFullYear();
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                monthsRange.push({ year, month });
+            }
+
+            for (let { year, month } of monthsRange) {
+                const filename = `${year}${month}Reading.json`;
+                try {
+                    // 先用 HEAD 確認檔案是否存在
+                    const response = await fetch(filename, { method: 'HEAD' });
+                    if (response.ok) {
+                        // 真的存在才抓內容
+                        const dataRes = await fetch(filename);
+                        if (dataRes.ok) {
+                            const data = await dataRes.json();
+                            available.push({
+                                value: `${year}-${month}`,
+                                text: data.title || `${year}年${parseInt(month)}月份8:15彌撒安排`,
+                                filename
+                            });
+                        }
+                    }
+                } catch (err) {
+                    // 檔案不存在或錯誤，略過
+                }
+            }
+
+            // 依年月排序
+            available.sort((a, b) => a.value.localeCompare(b.value));
+            return available;
+        }
+
+        // 獲取當前或最接近的下一個月份
+        function getCurrentOrNextMonth(availableMonths) {
+            if (availableMonths.length === 0) return null;
+
+            const today = new Date();
+            const currentYear = today.getFullYear();
+            const currentMonth = today.getMonth() + 1; // JavaScript months are 0-indexed
+            const currentDate = `${currentYear}-${currentMonth.toString().padStart(2, '0')}`;
+
+            // 找到當前月份或下一個可用月份
+            for (let month of availableMonths) {
+                if (month.value >= currentDate) {
+                    return month.value;
+                }
+            }
+
+            // 如果所有月份都已過去，返回最後一個
+            return availableMonths[availableMonths.length - 1].value;
+        }
+        
+        function getCurrentOrNextSundayIndex() {
+            if (!currentData || !currentData.schedule) return 0;
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // 只比較日期，不比較時間
+
+            // 解析月份值 (如 "2025-08")
+            const [year, month] = currentData.month.split('-').map(Number);
+
+            // 將主日的年月日組合為 Date，再比對
+            for (let i = 0; i < currentData.schedule.length; i++) {
+                let dateStr = currentData.schedule[i].date; // 例："8月10日"
+                // 解析出月與日
+                let match = dateStr.match(/(\d+)[^\d]+(\d+)[^\d]*/);
+                if (match) {
+                    let itemMonth = parseInt(match[1]);
+                    let itemDay = parseInt(match[2]);
+                    // 處理跨月（如果 schedule 裡有 9月x日 但 month=8 仍可比對）
+                    let itemYear = year;
+                    if (itemMonth < month) {
+                        itemYear += 1; // 假如資料橫跨年底
+                    } else if (itemMonth > month) {
+                        itemYear = year; // 正常情況
+                    }
+                    let sundayDate = new Date(itemYear, itemMonth - 1, itemDay);
+                    sundayDate.setHours(0, 0, 0, 0);
+
+                    if (sundayDate >= today) {
+                        return i;
+                    }
+                }
+            }
+
+            // 如果所有主日都已過去，開啟最後一個
+            return currentData.schedule.length - 1;
+        }
+
+        // 載入月份選擇器
+        async function loadMonthSelector() {
+            try {
+                availableMonths = await detectAvailableMonths();
+                const monthSelect = document.getElementById('month-select');
+                
+                if (availableMonths.length === 0) {
+                    monthSelect.innerHTML = '<option value="">沒有可用的月份資料</option>';
+                    return;
+                }
+
+                monthSelect.innerHTML = '';
+                availableMonths.forEach(month => {
+                    const option = document.createElement('option');
+                    option.value = month.value;
+                    option.textContent = month.text;
+                    monthSelect.appendChild(option);
+                });
+
+                // 選擇當前或下一個月份
+                const defaultMonth = getCurrentOrNextMonth(availableMonths);
+                if (defaultMonth) {
+                    monthSelect.value = defaultMonth;
+                    await loadMonth(defaultMonth);
+                }
+            } catch (error) {
+                console.error('載入月份選擇器時發生錯誤:', error);
+                document.getElementById('schedule-container').innerHTML = 
+                    '<div class="error">載入月份資料時發生錯誤</div>';
+            }
+        }
+
+        // 載入選中的月份
+        async function loadSelectedMonth() {
+            const monthSelect = document.getElementById('month-select');
+            const selectedMonth = monthSelect.value;
+            if (selectedMonth) {
+                await loadMonth(selectedMonth);
+            }
+        }
+
+        // 載入特定月份的資料
+        async function loadMonth(monthValue) {
+            try {
+                const monthInfo = availableMonths.find(m => m.value === monthValue);
+                if (!monthInfo) return;
+
+                document.getElementById('schedule-container').innerHTML = 
+                    '<div class="loading">正在載入彌撒安排...</div>';
+
+                const response = await fetch(monthInfo.filename);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                currentData = await response.json();
+                
+                // 更新標題
+                document.title = currentData.title;
+                
+                renderSchedule();
+            } catch (error) {
+                console.error('載入月份資料時發生錯誤:', error);
+                document.getElementById('schedule-container').innerHTML = 
+                    '<div class="error">載入彌撒安排時發生錯誤，請稍後再試</div>';
+            }
+        }
+
+        function toggleCard(index) {
+            const contentWrapper = document.getElementById(`content-${index}`);
+            const toggleIcon = document.getElementById(`toggle-${index}`);
+            
+            contentWrapper.classList.toggle('open');
+            toggleIcon.classList.toggle('open');
+        }
+
+        function renderSchedule() {
+            if (!currentData || !currentData.schedule) return;
+
+            const container = document.getElementById('schedule-container');
+            const defaultOpenIndex = getCurrentOrNextSundayIndex();
+            
+            container.innerHTML = '';
+            
+            currentData.schedule.forEach((item, index) => {
+                const isDefaultOpen = index === defaultOpenIndex;
+                
+                const weekCard = document.createElement('div');
+                weekCard.className = 'week-card';
+                
+                weekCard.innerHTML = `
+                    <div class="date-header" onclick="toggleCard(${index})">
+                        <div class="date">${item.date}</div>
+                        <div class="occasion">${item.occasion}</div>
+                        <div class="toggle-icon" id="toggle-${index}">▼</div>
+                    </div>
+                    <div class="content-wrapper" id="content-${index}" ${isDefaultOpen ? 'class="content-wrapper open"' : ''}>
+                        <div class="content-grid">
+                            <div class="service-section">
+                                <div class="section-title">服務人員</div>
+                                <div class="service-item priest-item">
+                                    <div class="service-label priest-label">主禮神父</div>
+                                    <div class="service-name priest-name">${item.priest}</div>
+                                </div>
+                                <div class="service-item">
+                                    <div class="service-label">讀經人員</div>
+                                    <div class="service-name">${item.reader}</div>
+                                </div>
+                                <div class="service-item">
+                                    <div class="service-label">早禱/讀經二/堂區報告</div>
+                                    <div class="service-name">${item.prayer_reporter}</div>
+                                </div>
+                            </div>
+                            <div class="hymns-section">
+                                <div class="section-title">彌撒歌曲</div>
+                                <div class="hymn-item">
+                                    <div class="hymn-label">進堂詠</div>
+                                    <div class="hymn-name">${item.hymns.entrance}</div>
+                                </div>
+                                <div class="hymn-item">
+                                    <div class="hymn-label">奉獻詠</div>
+                                    <div class="hymn-name">${item.hymns.offertory}</div>
+                                </div>
+                                <div class="hymn-item">
+                                    <div class="hymn-label">領主詠</div>
+                                    <div class="hymn-name">${item.hymns.communion}</div>
+                                </div>
+                                <div class="hymn-item">
+                                    <div class="hymn-label">禮成詠</div>
+                                    <div class="hymn-name">${item.hymns.recessional}</div>
+                                </div>
+                                <div class="hymn-item">
+                                    <div class="hymn-label">福音詠</div>
+                                    <div class="hymn-name">${item.hymns.gospel_acclamation}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(weekCard);
+            });
+        }
+
+        // 初始化頁面
+        window.onload = function() {
+            loadMonthSelector();
+        };
+    </script>
+</body>
+</html>
