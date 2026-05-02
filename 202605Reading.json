@@ -1,0 +1,72 @@
+{
+  "title": "5月份8:15彌撒安排（甲年）",
+  "month": "2026-05",
+  "schedule": [
+    {
+      "date": "5月3日",
+      "occasion": "復活期第五主日",
+      "priest": "羅神父",
+      "reader": "周詠恒",
+      "prayer_reporter": "劉婉冰",
+      "hymns": {
+        "entrance": "78首 我們同聚共樂歡然",
+        "offertory": "85首 全能顯赫造物主",
+        "communion": "94首 弟兄們，齊奉聖言",
+        "recessional": "218首 復活節堪歡詠"
+      }
+    },
+    {
+      "date": "5月10日",
+      "occasion": "復活期第六主日",
+      "priest": "鍾神父",
+      "reader": "鍾麗娟",
+      "prayer_reporter": "鄭光普",
+      "hymns": {
+        "entrance": "79首 普天地頌揚上主",
+        "offertory": "90首 仁慈的聖父",
+        "communion": "163首 長留聖體中",
+        "recessional": "242首 極溫良的母親"
+      }
+    },
+    {
+      "date": "5月17日",
+      "occasion": "耶穌升天節／社會傳播日",
+      "priest": "羅神父",
+      "reader": "周美玲",
+      "prayer_reporter": "劉海豪",
+      "hymns": {
+        "entrance": "226首 耶穌升天歌",
+        "offertory": "88首 至尊無對的天主",
+        "communion": "102首 耶穌基督是生命源",
+        "recessional": "272首 傳揚福音"
+      }
+    },
+    {
+      "date": "5月24日",
+      "occasion": "五旬節",
+      "priest": "鍾神父",
+      "reader": "廖芷珊",
+      "prayer_reporter": "周詠恒",
+      "hymns": {
+        "entrance": "114首 爾眾萬邦",
+        "offertory": "87首 請接受我們的禮品",
+        "communion": "232首 天主聖神",
+        "recessional": "106首 讚頌天主"
+      }
+    },
+    {
+      "date": "5月31日",
+      "occasion": "天主聖三",
+      "priest": "羅神父",
+      "reader": "劉婉冰",
+      "prayer_reporter": "陳秀好",
+      "hymns": {
+        "entrance": "123首 萬民，請讚美上主（歌詞第1和5節）",
+        "offertory": "87首 請接受我們的禮品",
+        "communion": "121首 主父慈恩應讚頌",
+        "recessional": "106首 讚頌天主"
+      }
+    }
+  ],
+  "notes": "讀經員與堂區報告依你提供的「2026年5月至6月讀經員時間表—8:15 a.m.」圖片錄入；圖片未列主祭，priest 欄暫留空。若「陳秀好」的人名需異體字或更正，請告知。"
+}
