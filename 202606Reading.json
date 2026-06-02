@@ -1,0 +1,59 @@
+{
+  "title": "6月份8:15彌撒安排（甲年）",
+  "month": "2026-06",
+  "schedule": [
+    {
+      "date": "6月7日",
+      "occasion": "基督聖體聖血節",
+      "priest": "羅神父",
+      "reader": "陳秀好",
+      "prayer_reporter": "周詠恒",
+      "hymns": {
+        "entrance": "92首 我主耶穌天地君王",
+        "offertory": "82首 奉獻身心",
+        "communion": "153首 基督的靈魂",
+        "recessional": "105首 請你們稱謝上主"
+      }
+    },
+    {
+      "date": "6月14日",
+      "occasion": "常年期第十一主日",
+      "priest": "鍾神父",
+      "reader": "劉婉冰",
+      "prayer_reporter": "廖芷珊",
+      "hymns": {
+        "entrance": "79首 普天地頌揚上主",
+        "offertory": "83首 上主，萬有的天主（二）",
+        "communion": "97首 上主是牧者",
+        "recessional": "107首 眾心的太陽"
+      }
+    },
+    {
+      "date": "6月21日",
+      "occasion": "常年期第十二主日",
+      "priest": "羅神父",
+      "reader": "鄭光普",
+      "prayer_reporter": "鍾麗娟",
+      "hymns": {
+        "entrance": "73首 奔赴主前",
+        "offertory": "84首 敬獻給你",
+        "communion": "96首 天上神聖食糧",
+        "recessional": "109首 天主我們讚美你"
+      }
+    },
+    {
+      "date": "6月28日",
+      "occasion": "常年期第十三主日",
+      "priest": "鍾神父",
+      "reader": "劉海豪",
+      "prayer_reporter": "周美玲",
+      "hymns": {
+        "entrance": "78首 我們同樂共聚歡然",
+        "offertory": "85首 全能顯赫造物主",
+        "communion": "270首 方濟各的祈禱",
+        "recessional": "105首 請你們稱謝上主"
+      }
+    }
+  ],
+  "notes": "讀經員/堂區報告依你提供的「2026年5月至6月讀經員時間表—8:15 a.m.」圖片（下半部）登錄；圖片未列主祭，priest 欄暫留空。如需更正姓名異體字（如：周詠恆／周詠恒、廖芷珊等），請告知。"
+}
