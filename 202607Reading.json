@@ -1,0 +1,58 @@
+{
+  "title": "7月份8:15彌撒安排（甲年）",
+  "month": "2026-07",
+  "schedule": [
+    {
+      "date": "7月5日",
+      "occasion": "常年期第十四主日",
+      "priest": "羅神父",
+      "reader": "周詠恒",
+      "prayer_reporter": "鍾麗娟",
+      "hymns": {
+        "entrance": "79首 普天地頌揚上主",
+        "offertory": "86首 仁慈的聖父",
+        "communion": "101首 分享同一聖體",
+        "recessional": "269首 真光照着我"
+      }
+    },
+    {
+      "date": "7月12日",
+      "occasion": "常年期第十五主日",
+      "priest": "鍾神父",
+      "reader": "鄭光普",
+      "prayer_reporter": "周美玲",
+      "hymns": {
+        "entrance": "72首 我們來到上主的聖殿",
+        "offertory": "90首 仁慈的聖父",
+        "communion": "122首 主慈頌",
+        "recessional": "264首 教友宗徒"
+      }
+    },
+    {
+      "date": "7月19日",
+      "occasion": "常年期第十六主日",
+      "priest": "羅神父",
+      "reader": "廖芷珊",
+      "prayer_reporter": "陳秀好",
+      "hymns": {
+        "entrance": "73首 奔赴主前",
+        "offertory": "84首 敬獻給你",
+        "communion": "149首 我主可愛耶穌",
+        "recessional": "279首 播種仁愛"
+      }
+    },
+    {
+      "date": "7月26日",
+      "occasion": "常年期第十七主日",
+      "priest": "羅神父",
+      "reader": "劉婉冰",
+      "prayer_reporter": "劉海豪",
+      "hymns": {
+        "entrance": "123首 萬民，請讚美上主",
+        "offertory": "87首 請接受我們的禮品",
+        "communion": "91首 我領主的體血時",
+        "recessional": "272首 傳揚福音"
+      }
+    }
+  ]
+}
