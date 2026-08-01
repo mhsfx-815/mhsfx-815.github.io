@@ -1,0 +1,76 @@
+{
+  "title": "8月份8:15彌撒安排（甲年）",
+  "month": "2026-08",
+  "schedule": [
+    {
+      "date": "8月2日",
+      "occasion": "常年期第十八主日",
+      "priest": "鍾神父",
+      "reader": "陳秀好",
+      "prayer_reporter": "周詠恒",
+      "hymns": {
+        "entrance": "73首 奔赴主前",
+        "offertory": "85首 全能顯赫造物主",
+        "communion": "97首 上主是牧者",
+        "recessional": "269首 真光照著我"
+      }
+    },
+    {
+      "date": "8月9日",
+      "occasion": "常年期第十九主日",
+      "priest": "羅神父",
+      "reader": "劉海豪",
+      "prayer_reporter": "周美玲",
+      "hymns": {
+        "entrance": "130首 萬民呵",
+        "offertory": "81首 上主，萬有天主（一）",
+        "communion": "94首 弟兄們，齊奉聖言",
+        "recessional": "107首 眾心的太陽"
+      }
+    },
+    {
+      "date": "8月16日",
+      "occasion": "常年期第二十主日",
+      "priest": "鍾神父",
+      "reader": "周詠恒",
+      "prayer_reporter": "廖芷珊",
+      "hymns": {
+        "entrance": "72首 我們來到上主的聖殿",
+        "offertory": "84首 敬獻給你",
+        "communion": "96首 天上神聖食糧",
+        "recessional": "110首 我們全心感謝天主"
+      }
+    },
+    {
+      "date": "8月23日",
+      "occasion": "常年期第二十一主日",
+      "priest": "羅神父",
+      "reader": "鍾麗娟",
+      "prayer_reporter": "鄭光普",
+      "hymns": {
+        "entrance": "130首 萬民呵",
+        "offertory": "86首 仁慈的聖父",
+        "communion": "115首 我是主的羊",
+        "recessional": "279首 播種仁愛"
+      }
+    },
+    {
+      "date": "8月30日",
+      "occasion": "常年期第廿二主日",
+      "priest": "鍾神父",
+      "reader": "陳秀好",
+      "prayer_reporter": "劉婉冰",
+      "hymns": {
+        "entrance": "72首 我們來到上主的聖殿",
+        "offertory": "85首 全能顯赫造物主",
+        "communion": "91首 我領主的體血時",
+        "recessional": "269首 真光照着我"
+      }
+    }
+  ],
+  "sources": [
+    "2026年7月至8月讀經員時間表—8:15 a.m.（圖片）—8/2 陳秀好；8/9 劉海豪；8/16 周詠恒；8/23 鍾麗娟；8/30 陳秀好（堂區報告同列）",
+    "使用者提供之8月份彌撒曲目單"
+  ],
+  "notes": "主祭名單未提供，priest 欄暫留空；如有主祭或人名異體字需要更正，請告知。"
+}
